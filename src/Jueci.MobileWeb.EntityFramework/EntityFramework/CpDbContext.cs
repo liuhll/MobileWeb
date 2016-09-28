@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Abp.EntityFramework;
 using Jueci.MobileWeb.Lottery.Models;
@@ -7,7 +6,7 @@ using Jueci.MobileWeb.Mappings;
 
 namespace Jueci.MobileWeb.EntityFramework
 {
-    public class MobileWebDbContext : AbpDbContext
+    public class CpDbContext : AbpDbContext
     {
         //TODO: Define an IDbSet for each Entity...
 
@@ -16,11 +15,7 @@ namespace Jueci.MobileWeb.EntityFramework
         //Example:
         //public virtual IDbSet<User> Users { get; set; }
 
-        public virtual IDbSet<UserPlanComputionInfo> UserPlanComputionInfos { get; set; }
-
-        public virtual IDbSet<LotteryPlanLib> LotteryPlanLibs { get; set; }
-
-        public virtual IDbSet<LotteryConfig> LotteryConfigs { get; set; }
+   
 
         #endregion
 
@@ -30,8 +25,8 @@ namespace Jueci.MobileWeb.EntityFramework
          *   But it may cause problems when working Migrate.exe of EF. If you will apply migrations on command line, do not
          *   pass connection string name to base classes. ABP works either way.
          */
-        public MobileWebDbContext()
-            : base("Default")
+        public CpDbContext()
+            : base("cpconstr")
         {
 
         }
@@ -40,7 +35,7 @@ namespace Jueci.MobileWeb.EntityFramework
          *   This constructor is used by ABP to pass connection string defined in MobileWebDataModule.PreInitialize.
          *   Notice that, actually you will not directly create an instance of MobileWebDbContext since ABP automatically handles it.
          */
-        public MobileWebDbContext(string nameOrConnectionString)
+        public CpDbContext(string nameOrConnectionString)
             : base(nameOrConnectionString)
         {
 
@@ -52,10 +47,7 @@ namespace Jueci.MobileWeb.EntityFramework
 
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Configurations.Add(new UserPlanComputionInfoMap());
-            modelBuilder.Configurations.Add(new LotteryPlanLibMap());
-
-            modelBuilder.Configurations.Add(new LotteryConfigMap());
+         
         }
     }
 }
