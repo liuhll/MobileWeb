@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Camew.Lottery;
+using Jeuci.SalesSystem.Entities.Common;
 using Jueci.MobileWeb.Lottery.Models.Transfer;
 using Jueci.MobileWeb.Ssc;
 
@@ -14,9 +15,19 @@ namespace Jueci.MobileWeb.Lottery.Impl
             _lotteryPlanProcessor = lotteryPlanProcessor;
         }
 
-        public  IList<UserPlanInfo> GetUserPlanInfos(string id,CPType cpType)
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,CPType cpType)
         {
             return _lotteryPlanProcessor.GetUserPlanInfos(id, cpType);
+        }
+
+        public ResultMessage<NewLottery> GetNewLottery(string id, CPType cpType)
+        {
+            return _lotteryPlanProcessor.GetNewLottery(id, cpType);
+        }
+
+        public ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, CPType cpType)
+        {
+            return _lotteryPlanProcessor.GetUserPlanDetail(id, cpType);
         }
     }
 }

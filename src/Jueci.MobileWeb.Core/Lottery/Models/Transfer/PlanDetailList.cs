@@ -18,7 +18,7 @@ namespace Jueci.MobileWeb.Lottery.Models.Transfer
 
         public int EndIndex { get; set; }
 
-        public RightOrWrongEnum RightOrWrong { get; set; }
+        public string RightOrWrong { get; set; }
 
 
 

@@ -1,0 +1,23 @@
+﻿namespace Jueci.MobileWeb.Common.Enums
+{
+    /// <summary>
+    /// 消息状态
+    /// </summary>
+    public enum ResultCode
+    {
+        /// <summary>
+        /// 成功
+        /// </summary>
+        Success = 200,
+
+        /// <summary>
+        /// 失败
+        /// </summary>
+        Fail = 400,
+
+        /// <summary>
+        /// 服务器内部错误
+        /// </summary>
+        ServiceError = 500,
+    }
+}

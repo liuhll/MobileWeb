@@ -5,7 +5,7 @@ namespace Jueci.MobileWeb.Lottery.Models.Transfer
 {
     public class NewLottery
     {
-        public List<int> LotteryResult { get; set; }
+        public string LotteryResult { get; set; }
 
         public int NextPeriod { get; set; }
 

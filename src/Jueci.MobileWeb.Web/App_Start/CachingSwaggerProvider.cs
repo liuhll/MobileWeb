@@ -16,12 +16,15 @@ namespace Jueci.MobileWeb.Web
         {
             var sd = defaultProvider.GetSwagger(rootUrl, apiVersion);
  
-            var rmPaths = new string[]
+            var rmPaths = new List<string>();
+        
+            foreach (var path in sd.paths)
             {
-                "/api/AbpCache/Clear", "/api/AbpCache/ClearAll",
-                "/api/AbpServiceProxies","/api/services/app/lotteryPlan/GetUserPlanInfos",
-                "/api/ServiceProxies"
-            };
+                if (path.Key.Contains("Abp") || path.Key.Contains("Proxies") || path.Key.Contains("services"))
+                {
+                    rmPaths.Add(path.Key);
+                }
+            }
             foreach (var rmpath in rmPaths)
             {
                 if (sd.paths.ContainsKey(rmpath))
