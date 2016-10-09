@@ -18,5 +18,6 @@ namespace Jueci.MobileWeb.Lottery.Models.Transfer
         public IList<int> RightTimes { get; set; }
 
         public IList<PlanDetailList> PlanDetails { get; set; }
+
     }
 }

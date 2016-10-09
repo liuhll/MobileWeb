@@ -56,15 +56,19 @@ namespace Jueci.MobileWeb.Lottery
 
 
 
-        public ResultMessage<NewLottery> GetNewLottery(string id, CPType cpType)
+        public ResultMessage<NewLottery> GetNewLottery(CPType cpType)
         {
             var sscLotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
             var latestCPDataInfo = sscLotteryEngine.GetLatestCPDataInfo();
+            if (latestCPDataInfo.Data.Data == null)
+            {
+                return new ResultMessage<NewLottery>(ResultCode.Fail,MessageTips.WaitingServiceStart);
+            }
             var nowTime = DateTime.Now;
             var newLottery = new NewLottery()
             {
                 CurrentPeriod = latestCPDataInfo.Data.ID,
-                LotteryResult = latestCPDataInfo.Data.Data,
+                LotteryResult = latestCPDataInfo.Data.Data.Split(',').Select(i=>Convert.ToInt32(i)).ToList(),
                 NextPeriod = latestCPDataInfo.NextCPDataID,
                 NextPeriodTimePoint = latestCPDataInfo.NextCPDataOpenTime,
 
@@ -99,15 +103,15 @@ namespace Jueci.MobileWeb.Lottery
                     {
                         ////064-066期|1 2 5 7|2|065|22049|对,
                         CycleName = dmsmResultItem.GetPlanRegionString(),                 
-                        LotteryResult = dmsmResultItem.GetDMSMForecastString(),
+                        LotteryResult = dmsmResultItem.ActualEndData,//
                         DsType = pc.Plan.DSType ,
                         EndIndex = dmsmResultItem.ActualEndTermIndex + 1,
                         CurrentCycleName = dmsmResultItem.GetPlanActualEndTerm(),
-                        GuessValue = dmsmResultItem.ActualEndData,
+                        GuessValue = dmsmResultItem.GetDMSMForecastString(),
                         RightOrWrong = dmsmResultItem.GetPlanResultString(),
 
                     }).ToList(),
-                  
+ 
                 };
             }).ToList();
             return new ResultMessage<IList<UserPlanDetail>>(userPlanDetail);

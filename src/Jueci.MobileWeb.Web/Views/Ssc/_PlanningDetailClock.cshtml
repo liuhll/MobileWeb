@@ -1,0 +1,12 @@
+﻿@model Jueci.MobileWeb.Lottery.Models.Transfer.NewLottery
+
+<span>@Model.CurrentPeriodDisplay</span>
+<div class="fr number-container">
+    @foreach (var item in Model.LotteryResult)
+    {
+        <span class="number-circle number-circle-small" style="margin: 0 3px">@Html.Raw(item)</span>
+    }
+</div>
+<div class="clearfix"></div>
+
+

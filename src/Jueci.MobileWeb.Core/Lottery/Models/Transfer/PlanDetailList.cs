@@ -1,4 +1,5 @@
-﻿using Camew.Lottery.AppService;
+﻿using Camew;
+using Camew.Lottery.AppService;
 using Jueci.MobileWeb.Common.Enums;
 
 namespace Jueci.MobileWeb.Lottery.Models.Transfer
@@ -13,6 +14,19 @@ namespace Jueci.MobileWeb.Lottery.Models.Transfer
         public DMSMType DsType { get; set; }
 
         public string GuessValue { get; set; }
+
+        public string LotteryResultDisplay
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(LotteryResult))
+                {
+                    var gvList = LotteryResult.ToCharArray();
+                    return gvList.ToSplitString(" ");
+                }
+                return string.Empty;
+            }
+        }
 
         public string LotteryResult { get; set; }
 

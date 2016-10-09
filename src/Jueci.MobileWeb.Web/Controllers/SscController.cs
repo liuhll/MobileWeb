@@ -7,6 +7,8 @@ using System.Web.Mvc;
 using Jueci.MobileWeb.Lottery;
 using Jueci.MobileWeb.Ssc;
 using Camew.Lottery;
+using Jueci.MobileWeb.Common.Enums;
+using Jueci.MobileWeb.Web.Models.Common;
 
 namespace Jueci.MobileWeb.Web.Controllers
 {
@@ -21,16 +23,41 @@ namespace Jueci.MobileWeb.Web.Controllers
         }
 
         // GET: Ssc
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            //var obj= _sscPlanAppService.GetUserPlanInfos("201600927001",CPType.cqssc);   
-            //return Json(obj,JsonRequestBehavior.AllowGet);
-            return View();
+            //201600927001
+            var userPlanInfo = _sscPlanAppService.GetUserPlanInfos(id, CPType.cqssc);
+            if (userPlanInfo.Code != ResultCode.Success)
+            {
+                return new HttpNotFoundResult(userPlanInfo.Msg);
+            }
+            return View(userPlanInfo.Data);
         }
 
-        public ActionResult PlanDetails()
+        public ActionResult PlanDetails(string id)
         {
-            return View();
+            var userPlanDetail = _sscPlanAppService.GetUserPlanDetail(id, CPType.cqssc);
+            if (userPlanDetail.Code != ResultCode.Success)
+            {
+                return new HttpNotFoundResult(userPlanDetail.Msg);
+            }
+            return View(userPlanDetail.Data);
+        }
+
+        public PartialViewResult Clock(ClockPage clockPage)
+        {
+            var newLotteryResult = _sscPlanAppService.GetNewLottery(CPType.cqssc);
+            switch (clockPage)
+            {
+                case ClockPage.HomePage:
+                    return PartialView("_Clock", newLotteryResult.Data);
+                case ClockPage.PlanningDetail:
+                    return PartialView("_PlanningDetailClock", newLotteryResult.Data);
+                default:
+                    return PartialView("_Clock", newLotteryResult.Data);
+            }
+
+           
         }
     }
 }

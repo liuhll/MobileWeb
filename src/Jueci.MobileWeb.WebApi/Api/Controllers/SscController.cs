@@ -47,9 +47,10 @@ namespace Jueci.MobileWeb.Api.Controllers
         /// <returns></returns> 
         /// <remarks>获取下一期开奖信息</remarks>                 
         [HttpGet]   
-        public ResultMessage<NewLottery> Clock(string id)
+//        [Route("api/ssc/clock")]
+        public ResultMessage<NewLottery> Clock()
         {
-            return _lotteryPlanAppService.GetNewLottery("201600927001", CPType.cqssc);
+            return _lotteryPlanAppService.GetNewLottery(CPType.cqssc);
         }
 
         /// <summary>

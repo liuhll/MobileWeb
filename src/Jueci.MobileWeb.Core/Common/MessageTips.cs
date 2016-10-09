@@ -12,5 +12,7 @@ namespace Jueci.MobileWeb.Common
         /// 还没有从数据库中拉取到最近的开奖信息
         /// </summary>
         public const string NoDmsmResult = "还没有获取到开奖信息，请稍后再尝试！";
+
+        public const string WaitingServiceStart = "应用正在启动,请稍后尝试!";
     }
 }

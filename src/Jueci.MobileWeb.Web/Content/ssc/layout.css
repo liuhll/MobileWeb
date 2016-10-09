@@ -1,9 +1,11 @@
 ﻿body {
     font-family: "Microsoft YaHei",Arial, Helvetica, sans-serif;
     font-size: 14px;
-    font-weight: 300 !important;
+    font-weight: 300;
 }
 
+*{ margin:0; padding:0; list-style:none;}
+img{ border:none;}
 
 .number-circle {
     display: inline-block;
@@ -46,10 +48,10 @@
 
 
 .number-circle-blue-small {
-    border: 2px solid #0000ff;
-    width: 15px;
-    height: 15px;
-    font-size: 4px;
+    border: 1px solid #0000ff;
+    width: 13px;
+    height: 13px;
+    font-size: 8px;
     text-align: center;
     color: #0000ff;
 }
@@ -59,11 +61,18 @@
 }
 
 .lv-item-ds {
-    margin-top: 2px;
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
 }
 
 .ui-content-trans {
     background: transparent !important;
+    font-weight: 200 !important;
+}
+
+.ui-content-gray {
+    background: #F5F5F5 !important;
 }
 
 /*移动端字体*/
@@ -112,7 +121,7 @@
 .lv-item-title {
     float: left;
     font-size: 16px;
-    font-weight: 800;
+    font-weight: normal;
 }
 
 .lv-item-progress-box {
@@ -122,26 +131,25 @@
 
 .lv-item-progress-v {
     font-size: 10px;
-    font-family: Times New Roman;
     font-weight: normal;
 }
 
 .lv-item-q {
-    font-size: 10px;
+    font-size: 12px;
     font-weight: normal;
 }
 
 
 .progress-block-green {
-    height: 8px;
-    width: 8px;
+    height: 6px;
+    width: 6px;
     background-color: green;
     display: inline-block;
 }
 
 .progress-block-red {
-    height: 9px;
-    width: 9px;
+    height: 6px;
+    width: 6px;
     background-color: #D63138;
     display: inline-block;
 }
@@ -290,3 +298,27 @@
 .tab-lv-item-second span {
     margin: 0 3px;
 }
+
+.tab-scroll {
+    overflow-x: auto;
+    height: .6rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(0);
+}
+
+.tab-scroll .list {
+    height: .44rem;
+    display: -webkit-box;
+    display: box;
+}
+
+ol, ul, li {
+    list-style: none;
+    list-style-type: none;
+    list-style-position: initial;
+    list-style-image: initial;
+}
+
+

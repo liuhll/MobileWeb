@@ -256,9 +256,10 @@ namespace Jueci.MobileWeb.Web
         {
 #if DEBUG
             var path = Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).Parent;            
-            return System.String.Format(@"{0}\Jueci.MobileWeb.WebApi\bin\Debug\SwaggerApi.XML", path.FullName);
+            return System.String.Format(@"{0}\Jueci.MobileWeb.WebApi\bin\Debug\SwaggerWebApi.XML", path.FullName);
 #else
-            var 
+           var path = Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory);            
+             return System.String.Format(@"{0}\bin\SwaggerWebApi.XML", path.FullName);
 #endif
         }
 
@@ -266,15 +267,22 @@ namespace Jueci.MobileWeb.Web
         {
 #if DEBUG
             var path = Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory).Parent;
-            return System.String.Format(@"{0}\Jueci.MobileWeb.Core\bin\Debug\SwaggerApi.XML", path.FullName);
+            return System.String.Format(@"{0}\Jueci.MobileWeb.Core\bin\Debug\SwaggerModelApi.XML", path.FullName);
 #else
+            var path = Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory);            
+            return System.String.Format(@"{0}\bin\SwaggerModelApi.XML", path.FullName);
 #endif
         }
-        
+
 
         protected static string GetXmlCommentsPath()
         {
-            return System.String.Format(@"{0}\bin\SwaggerApi.XML", System.AppDomain.CurrentDomain.BaseDirectory);
+#if DEBUG
+            return System.String.Format(@"{0}\bin\SwaggerDefaultApi.XML", System.AppDomain.CurrentDomain.BaseDirectory);
+#else
+            var path = Directory.GetParent(System.AppDomain.CurrentDomain.BaseDirectory);            
+            return System.String.Format(@"{0}\bin\SwaggerDefaultApi.XML", path.FullName);
+#endif
         }
     }
 }

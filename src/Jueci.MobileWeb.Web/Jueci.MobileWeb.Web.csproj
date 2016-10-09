@@ -34,7 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\SwaggerApi.XML</DocumentationFile>
+    <DocumentationFile>bin\SwaggerDefaultApi.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -346,6 +346,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\ssc\slide-tabs.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -395,6 +396,9 @@
     <Content Include="Content\flags\famfamfam-flags.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="images\icon\clock%402x.png" />
+    <Content Include="images\icon\clock%403x.png" />
+    <Content Include="images\icon\clock.png" />
     <Content Include="images\icon\ding.png" />
     <Content Include="images\icon\glzh.png" />
     <Content Include="images\icon\glzhax.png" />
@@ -457,6 +461,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jueci\slide-tabs.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -491,6 +496,7 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SscController.cs" />
+    <Compile Include="Models\Common\ClockPage.cs" />
     <Compile Include="Models\Layout\LanguageSelectionViewModel.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Controllers\MobileWebControllerBase.cs" />
@@ -515,6 +521,11 @@
     <Content Include="Views\Shared\_HeadCommon.cshtml" />
     <None Include="Views\Ssc\Index.cshtml" />
     <Content Include="Views\Ssc\PlanDetails.cshtml" />
+    <Content Include="Views\Ssc\_Clock.cshtml" />
+    <Content Include="Views\Ssc\_UserPlanInfoList.cshtml" />
+    <Content Include="Views\Ssc\_UserPlanDetailTabs.cshtml" />
+    <Content Include="Views\Ssc\_UserPlanDetailContent.cshtml" />
+    <Content Include="Views\Ssc\_PlanningDetailClock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

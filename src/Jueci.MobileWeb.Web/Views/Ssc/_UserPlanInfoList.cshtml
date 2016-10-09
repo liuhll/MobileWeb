@@ -1,0 +1,39 @@
+﻿@using Camew.Lottery.AppService
+@using Jueci.MobileWeb.Common.Enums
+@model IList<Jueci.MobileWeb.Lottery.Models.Transfer.UserPlanInfo>
+
+@{
+    int i = 1;
+}
+
+@foreach (var item in Model)
+{
+
+    <li data-icon="false">
+        <a class=@Html.Raw(i%2 == 1 ? "ui-content-trans" : "ui-content-gray") href="">
+            <div>
+                <img src="~/images/icon/jhfa.png" class="lv-item-jhfa" alt="jhfa"/>
+                <span class="lv-item-title">@Html.Raw(item.Name)</span>
+                <span class="lv-item-progress-box">
+                    <span>
+                            @foreach (var block in item.GuessResultList)
+                            {
+                                <div class="@Html.Raw(block == RightOrWrongEnum.Right ? "progress-block-green" : "progress-block-red")"></div>
+                            }
+
+                    </span>
+                    <span class="lv-item-progress-v">@string.Format("{0}%", item.GuessPercent*100)</span>
+                </span>
+                <div class="clearfix"></div>
+            </div>
+            <div style="margin-top: 6px">
+                <span class="lv-item-q">@item.PlanSection</span>
+                <span class="number-circle number-circle-blue-small">@item.EndIndex</span>
+                <span class="lv-item-ds">@Html.Raw(string.Format("{0}", item.DsType == DMSMType.DM ? "定" : "杀"))</span>
+                <span class="lv-item-q">@item.GuessValue</span>
+            </div>
+        </a>
+    </li>
+
+    i++;
+}
