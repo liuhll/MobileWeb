@@ -340,6 +340,10 @@
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile-1.4.5.min.js" />
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile.structure-1.4.5.css" />
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile.structure-1.4.5.min.css" />
+    <Content Include="Abp\Lib\jquery\jquery-2.1.4.js" />
+    <Content Include="Abp\Lib\jquery\jquery-2.1.4.min.js" />
+    <Content Include="Abp\Lib\shCircleLoader\jquery.shCircleLoader-min.js" />
+    <Content Include="Abp\Lib\shCircleLoader\jquery.shCircleLoader.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -446,6 +450,7 @@
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile-1.4.5.min.map" />
+    <Content Include="Abp\Lib\jquery\jquery-2.1.4.min.map" />
     <None Include="Properties\PublishProfiles\webapp.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -461,6 +466,9 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jueci\clock.js" />
+    <Content Include="Scripts\jueci\loader.js" />
+    <Content Include="Scripts\jueci\lotteryclock.js" />
     <Content Include="Scripts\jueci\slide-tabs.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />

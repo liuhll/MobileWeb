@@ -20,7 +20,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery.mobile.bootstrap": "git@github.com:commadelimited/jQuery-Mobile-Bootstrap-Theme.git"
-    
+    "jquery.mobile.bootstrap": "git@github.com:commadelimited/jQuery-Mobile-Bootstrap-Theme.git",
+    "shCircleLoader": "git@github.com:sunhater/shCircleLoader.git" 
   }
 }

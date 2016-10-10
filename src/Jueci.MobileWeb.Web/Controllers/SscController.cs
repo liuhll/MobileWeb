@@ -31,6 +31,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             {
                 return new HttpNotFoundResult(userPlanInfo.Msg);
             }
+            ViewBag.PlanId = id;
             return View(userPlanInfo.Data);
         }
 
@@ -58,6 +59,17 @@ namespace Jueci.MobileWeb.Web.Controllers
             }
 
            
+        }
+
+        public PartialViewResult UserPlanInfoList(string id)
+        {
+            var userPlanInfo = _sscPlanAppService.GetUserPlanInfos(id, CPType.cqssc);
+            if (userPlanInfo.Code != ResultCode.Success)
+            {
+                throw new Exception("get new planinfo error!");
+            }
+            ViewBag.PlanId = id;
+            return PartialView("_UserPlanInfoList", userPlanInfo.Data);
         }
     }
 }

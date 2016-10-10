@@ -11,6 +11,10 @@ namespace Jueci.MobileWeb.Lottery.Models.Transfer
 
         public DateTime NextPeriodTimePoint { get; set; }
 
+        public string NextPeriodTimePointDisplay {
+            get { return NextPeriodTimePoint.ToString("yyyy-MM-dd HH:mm:ss"); }
+        }
+
         public int CurrentPeriod { get; set; }
 
         public string CurrentPeriodDisplay

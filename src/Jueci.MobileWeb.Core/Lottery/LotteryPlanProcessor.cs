@@ -58,6 +58,7 @@ namespace Jueci.MobileWeb.Lottery
 
         public ResultMessage<NewLottery> GetNewLottery(CPType cpType)
         {
+        
             var sscLotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
             var latestCPDataInfo = sscLotteryEngine.GetLatestCPDataInfo();
             if (latestCPDataInfo.Data.Data == null)

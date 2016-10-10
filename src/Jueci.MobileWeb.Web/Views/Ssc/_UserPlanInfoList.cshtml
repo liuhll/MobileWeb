@@ -1,14 +1,29 @@
-﻿@using Camew.Lottery.AppService
+﻿@using System.Web.Optimization
+@using Camew.Lottery.AppService
 @using Jueci.MobileWeb.Common.Enums
 @model IList<Jueci.MobileWeb.Lottery.Models.Transfer.UserPlanInfo>
 
 @{
+    string planId = ViewBag.PlanId;
     int i = 1;
 }
 
+@if (Request.IsAjaxRequest())
+{
+    <link href="~/Abp/Lib/jquery.mobile.bootstrap/themes/Bootstrap.min.css" rel="stylesheet">
+    <link href="~/Abp/Lib/jquery.mobile/jquery.mobile.structure-1.4.5.min.css" rel="stylesheet">
+    <link href="~/Abp/Lib/jquery.mobile.bootstrap/themes/jquery.mobile.icons.min.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/ssc/layout.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script> 
+    <script src="~/Abp/Lib/jquery.mobile/jquery.mobile-1.4.5.js"></script>
+}
+<script src="~/Scripts/jueci/loader.js"></script>
+
+@Html.Hidden("PlanId", planId)
+
 @foreach (var item in Model)
 {
-
     <li data-icon="false">
         <a class=@Html.Raw(i%2 == 1 ? "ui-content-trans" : "ui-content-gray") href="">
             <div>

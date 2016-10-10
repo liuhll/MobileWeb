@@ -1,10 +1,12 @@
 ﻿@{
     ViewBag.Title = "计划分享";
     ViewBag.IsHomePage = true;
+ 
 }
 @model IList<Jueci.MobileWeb.Lottery.Models.Transfer.UserPlanInfo>
 
-<ul data-role="listview" data-inset="true" class="listview-content" data-divider-theme="a">
+
+<ul id="userPlanInfoList" data-role="listview" data-inset="true" class="listview-content" data-divider-theme="a">
     @Html.Partial("_UserPlanInfoList",Model)
    
 </ul>
