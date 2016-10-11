@@ -24,8 +24,9 @@
 
 @foreach (var item in Model)
 {
-    <li data-icon="false">
-        <a class=@Html.Raw(i%2 == 1 ? "ui-content-trans" : "ui-content-gray") href="">
+    <li data-icon="false"  data-tabIndex="@i">
+        <a class=@Html.Raw(i%2 == 1 ? "ui-content-trans" : "ui-content-gray")
+            @*href="@Url.RouteUrl("PlanDetails",new {Id = planId, TabIndex= i})"*@> 
             <div>
                 <img src="~/images/icon/jhfa.png" class="lv-item-jhfa" alt="jhfa"/>
                 <span class="lv-item-title">@Html.Raw(item.Name)</span>
@@ -52,3 +53,12 @@
 
     i++;
 }
+
+<script>
+    $(function() {
+        $('li').on('click', function () {
+           // debugger;
+            location.href = abp.appPath + "app/ssc/PlanDetails/" + $('#PlanId').val() + "?tabIndex=" + $(this).data('tabindex');//$(this).data('tabindex')
+        });
+    });
+</script>

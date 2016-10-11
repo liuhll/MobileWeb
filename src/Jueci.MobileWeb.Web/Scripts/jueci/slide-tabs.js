@@ -10,7 +10,8 @@
         }
         else {
             $(".sideline").css({ left: 0 });
-            $(".find_nav_list li").eq(0).addClass("find_nav_cur").siblings().removeClass("find_nav_cur");
+            $(".find_nav_list li").eq($('#CurrentTabIndex').val() - 1).addClass("find_nav_cur").siblings().removeClass("find_nav_cur");
+ 
         }
     });
     var nav_w = $(".find_nav_list li").first().width();

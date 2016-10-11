@@ -36,7 +36,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             return View(userPlanInfo.Data);
         }
 
-        public ActionResult PlanDetails(string id)
+        public ActionResult PlanDetails(string id,int tabIndex = 1)
         {
             var userPlanDetail = _sscPlanAppService.GetUserPlanDetail(id, CPType.cqssc);
             if (userPlanDetail.Code != ResultCode.Success)
@@ -44,6 +44,7 @@ namespace Jueci.MobileWeb.Web.Controllers
                 return new HttpNotFoundResult(userPlanDetail.Msg);
             }
             ViewBag.PlanId = id;
+            ViewBag.TabIndex = tabIndex;
             return View(userPlanDetail.Data);
         }
 

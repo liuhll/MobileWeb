@@ -3,14 +3,16 @@
 
 @{
     int tabIndex = 1;
+    int currentTabIndex = ViewBag.TabIndex;
 }
 
 @foreach (var item in Model)
 {
-    <li class="@Html.Raw(tabIndex == 1 ? "find_nav_cur" : "")" data-tabindex="@tabIndex">
-        <a class="ui-btn-table @Html.Raw(tabIndex == 1 ? "ui-btn-active" : "")"  data-transition="slide"
-            href="@Html.Raw(string.Format("#tab{0}", tabIndex))">@item.PlanName</a>
+    <li class="@Html.Raw(tabIndex == currentTabIndex ? "ui-tabs-active ui-state-active find_nav_cur" : "")" data-tabindex="@tabIndex">
+        <a class="ui-btn-table @Html.Raw(tabIndex == currentTabIndex ? "ui-btn-active" : "")" data-transition="slide"
+           href="@Html.Raw(string.Format("#tab{0}", tabIndex))">@item.PlanName</a>
     </li>
+  
     tabIndex++;
 }
 
