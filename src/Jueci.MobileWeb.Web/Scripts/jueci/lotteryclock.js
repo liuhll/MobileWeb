@@ -64,9 +64,7 @@ function getNewLottery() {
                         $.fn.Loader(true);
                     },
                     "success": function (data1) {
-
                         $('#userPlanInfoList').html(data1);
-
                         setTimeout("nextLotteryClock();", _interval);
                       
                     },

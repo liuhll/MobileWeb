@@ -9,6 +9,7 @@ using Jueci.MobileWeb.Ssc;
 using Camew.Lottery;
 using Jueci.MobileWeb.Common.Enums;
 using Jueci.MobileWeb.Web.Models.Common;
+using Jueci.MobileWeb.Web.Models.UserPlanDetail;
 
 namespace Jueci.MobileWeb.Web.Controllers
 {
@@ -42,6 +43,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             {
                 return new HttpNotFoundResult(userPlanDetail.Msg);
             }
+            ViewBag.PlanId = id;
             return View(userPlanDetail.Data);
         }
 
@@ -70,6 +72,36 @@ namespace Jueci.MobileWeb.Web.Controllers
             }
             ViewBag.PlanId = id;
             return PartialView("_UserPlanInfoList", userPlanInfo.Data);
+        }
+
+        public PartialViewResult UserPlanDetailClock(string id,string planName, int tabIndex)
+        {
+            var userPlanDetail = _sscPlanAppService.GetUserPlanDetailPosition(id, planName, CPType.cqssc);
+            if (userPlanDetail.Code != ResultCode.Success)
+            {
+                 throw new Exception("get  UserPlanDetailClock error!");
+            }
+            return PartialView("_UserPlanDetailClock", new UserPlanDetailClock(tabIndex,userPlanDetail.Data));
+        }
+
+        public PartialViewResult UserPlanDetailInfo(string id, string planName)
+        {
+            var userPlanDetail = _sscPlanAppService.GetUserPlanDetailPosition(id, planName, CPType.cqssc);
+            if (userPlanDetail.Code != ResultCode.Success)
+            {
+                throw new Exception("get  UserPlanDetailClock error!");
+            }
+            return PartialView("_UserPlanDetailInfo", userPlanDetail.Data);
+        }
+
+        public PartialViewResult UserPlanDetailList(string id, string planName)
+        {
+            var userPlanDetail = _sscPlanAppService.GetUserPlanDetailPosition(id, planName, CPType.cqssc);
+            if (userPlanDetail.Code != ResultCode.Success)
+            {
+                throw new Exception("get  UserPlanDetailClock error!");
+            }
+            return PartialView("_UserPlanDetailList",userPlanDetail.Data);
         }
     }
 }

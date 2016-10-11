@@ -470,6 +470,8 @@
     <Content Include="Scripts\jueci\loader.js" />
     <Content Include="Scripts\jueci\lotteryclock.js" />
     <Content Include="Scripts\jueci\slide-tabs.js" />
+    <Content Include="Scripts\jueci\swipe-panel.js" />
+    <Content Include="Scripts\jueci\user-plandetail-clock.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
@@ -512,6 +514,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Layout\TopMenuViewModel.cs" />
+    <Compile Include="Models\UserPlanDetail\UserPlanDetailClock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MobileWebWebViewPageBase.cs" />
     <Compile Include="Views\UrlChecker.cs" />
@@ -534,6 +537,9 @@
     <Content Include="Views\Ssc\_UserPlanDetailTabs.cshtml" />
     <Content Include="Views\Ssc\_UserPlanDetailContent.cshtml" />
     <Content Include="Views\Ssc\_PlanningDetailClock.cshtml" />
+    <Content Include="Views\Ssc\_UserPlanDetailList.cshtml" />
+    <Content Include="Views\Ssc\_UserPlanDetailInfo.cshtml" />
+    <Content Include="Views\Ssc\_UserPlanDetailClock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

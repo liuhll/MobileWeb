@@ -1,4 +1,5 @@
 ﻿@using Jueci.MobileWeb.Web.Models.Common
+@using Jueci.MobileWeb.Web.Models.UserPlanDetail
 @model IList<Jueci.MobileWeb.Lottery.Models.Transfer.UserPlanDetail>
 
 @{
@@ -8,77 +9,17 @@
 @foreach (var item in Model)
 {
     <div id="@Html.Raw(string.Format("tab{0}",tabIndex))" class="ui-body-a ui-content tab-container" style="background: #ffffff; padding: 0 0;">
-        <div class="tab-section1">
-            <div class="tab-section1-first">
-                @Html.Action("Clock", new { ClockPage = ClockPage.PlanningDetail })              
-            </div>
-            <div class="tab-section1-second">
-                @*<span>@item.PlanName</span>*@
-                <span>@item.PlanDetails.LastOrDefault().CycleName</span>
-                <span class="font-emphasize">预</span>
-                <span class="font-emphasize">@item.PlanDetails.LastOrDefault().GuessValue</span>
-            </div>
-            <div class="tab-section1-three fr">
-                <span class="number-circle number-circle-blue-small">1</span>
-                <span>083期</span>
-                <span><img width="14" height="14" src="~/images/icon/clock@2x.png" alt="sj2" /></span>
-                <span>
-                    <div class="countdown-number-content fr">
-                        <div class="countdown-number  fl">0</div>
-                        <div class="countdown-number  fl">1</div>
-                        <div class="fl">:</div>
-                        <div class="countdown-number  fl">2</div>
-                        <div class="countdown-number  fl">3</div>
+        <div id="@Html.Raw(string.Format("tab-section1-{0}",tabIndex))" class="tab-section1">          
 
-                    </div>
-                </span>
-            </div>
-            <div class="clearfix"></div>
+            @Html.Partial("_UserPlanDetailClock", new UserPlanDetailClock(tabIndex,item))
         </div>
-        <div class="tab-section2">
-            <div class="tab-section2-line">
-                <div class="fl"><span>准确率</span><span class="font-emphasize">@Html.Raw(string.Format("{0}%",item.RightRate * 100))</span></div>
-                <div class="fl"><span>最大连对</span><span class="font-emphasize">@item.MaxAlwaysRight</span></div>
-                <div class="fl"><span>最大连错</span><span class="font-emphasize">@item.MaxAlwaysWrong</span></div>
-                <div class="fl"><span>当前最大连对/错</span><span class="font-emphasize">@item.CurrentROrW</span></div>
-                <div class="clearfix"></div>
-            </div>
-
-            <div class="tab-section2-line">
-                <div class="fl"><span>第一期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次",item.RightTimes[0]))</span></div>
-                <div class="fl"><span>第二期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", item.RightTimes[1]))</span></div>
-                <div class="fl"><span>第三期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", item.RightTimes[2]))</span></div>
-
-                <div style="clear: both"></div>
-            </div>
+        <div id="@Html.Raw(string.Format("tab-section2-{0}",tabIndex))" class="tab-section2">
+          
+            @Html.Partial("_UserPlanDetailInfo",item)
         </div>
-        <div class="tab-section3">
-            <ul data-role="listview" class="tab-lv" data-divider-theme="a">
-                @foreach (var lvItem in item.PlanDetails.Take(item.PlanDetails.Count -1).OrderByDescending(p=>p.CurrentCycleName))
-                {
-                    <li data-icon="false">
-                        <a class="ui-content-trans" href="">
-                            <div class="tab-lv-item-first">
-                                <span>@lvItem.CycleName</span>
-                                <span class="font-emphasize">预</span>
-                                <span>@lvItem.GuessValue</span>
-                            </div>
-                            <div class="tab-lv-item-second fr">
-                                <span class="number-circle number-circle-blue-small">@lvItem.EndIndex</span>
-                                <span>@Html.Raw(string.Format("{0}期",lvItem.CurrentCycleName))</span>
-                                <span class="font-blue">开</span>
-                                <span class="font-blue">
-                                   @lvItem.LotteryResultDisplay
-                                </span>
-                                <span class="@Html.Raw(lvItem.RightOrWrong.Equals("对") ? "font-right" : "font-emphasize")">
-                                    @lvItem.RightOrWrong
-                                </span>
-                            </div>
-                        </a>
-                    </li>
-                }
-              
-            </ul>
+        <div id="@Html.Raw(string.Format("tab-section3-{0}", tabIndex))" class="tab-section3">
+            
+            @Html.Partial("_UserPlanDetailList", item)
         </div>
     </div>
 

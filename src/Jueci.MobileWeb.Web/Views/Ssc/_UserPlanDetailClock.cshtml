@@ -1,0 +1,46 @@
+﻿@using System.Diagnostics
+@using Jueci.MobileWeb.Web.Models.Common
+@model Jueci.MobileWeb.Web.Models.UserPlanDetail.UserPlanDetailClock
+
+@{
+    if (Model.UserPlanDetail == null)
+    {
+        throw new Exception("视图渲染失败...");
+    }
+}
+
+@if (Request.IsAjaxRequest())
+{
+    <link href="~/Content/ssc/layout.css" rel="stylesheet" />
+}
+
+<div class="tab-section1-first">
+    @Html.Action("Clock", new { ClockPage = ClockPage.PlanningDetail })
+</div>
+<div class="tab-section1-second">
+    @*<span>@Model.UserPlanDetail.PlanName</span>*@
+    @Html.Hidden(string.Format("planName{0}",Model.TabIndex), Model.UserPlanDetail.PlanName)
+    <span>@Model.UserPlanDetail.PlanDetails.LastOrDefault().CycleName</span>
+    <span class="font-emphasize">预</span>
+    <span class="font-emphasize">@Model.UserPlanDetail.PlanDetails.LastOrDefault().GuessValue</span>
+</div>
+<div class="tab-section1-three fr">
+    <span class="number-circle number-circle-blue-small">1</span>
+    <span>@Html.Raw(string.Format("{0}期", Model.UserPlanDetail.PlanDetails.LastOrDefault().CurrentCycleName))</span>
+    <span><img width="14" height="14" src="~/images/icon/clock@2x.png" alt="sj2" /></span>
+    <span>
+        <div class="countdown-number-content fr">
+            <div id="@Html.Raw(string.Format("nextPeriodDisplay{0}", Model.TabIndex))" class="font-face clock-hide" style="font-size: 14px;font-weight: normal"></div>
+
+            <div id="@Html.Raw(string.Format("hourTenNumber{0}", Model.TabIndex))" class="hour countdown-number clock fl clock-hide">0</div>
+            <div id="@Html.Raw(string.Format("hourUnitNumber{0}", Model.TabIndex))" class="hour countdown-number clock fl clock-hide">0</div>
+            <div class="hour clock fl hide clock-hide">:</div>
+            <div id="@Html.Raw(string.Format("minuteTenNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
+            <div id="@Html.Raw(string.Format("minuteUnitNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
+            <div class="clock fl">:</div>
+            <div id="@Html.Raw(string.Format("secondTenNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
+            <div id="@Html.Raw(string.Format("secondUnitNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
+        </div>
+    </span>
+</div>
+<div class="clearfix"></div>

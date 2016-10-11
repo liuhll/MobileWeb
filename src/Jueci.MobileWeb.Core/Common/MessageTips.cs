@@ -14,5 +14,7 @@ namespace Jueci.MobileWeb.Common
         public const string NoDmsmResult = "还没有获取到开奖信息，请稍后再尝试！";
 
         public const string WaitingServiceStart = "应用正在启动,请稍后尝试!";
+
+        public const string NoThisPlanDetail = "没有该名称为{0}的计划信息!";
     }
 }

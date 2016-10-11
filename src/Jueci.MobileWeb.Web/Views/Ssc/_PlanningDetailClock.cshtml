@@ -1,7 +1,15 @@
 ﻿@model Jueci.MobileWeb.Lottery.Models.Transfer.NewLottery
 
 <span>@Model.CurrentPeriodDisplay</span>
+
+@if (Request.IsAjaxRequest())
+{
+    <link href="~/Content/ssc/layout.css" rel="stylesheet" />
+}
+
 <div class="fr number-container">
+    @Html.Hidden("NextPeriodTimePoint", Model.NextPeriodTimePointDisplay)
+    @Html.Hidden("CurrentPeriod", Model.CurrentPeriod)
     @foreach (var item in Model.LotteryResult)
     {
         <span class="number-circle number-circle-small" style="margin: 0 3px">@Html.Raw(item)</span>

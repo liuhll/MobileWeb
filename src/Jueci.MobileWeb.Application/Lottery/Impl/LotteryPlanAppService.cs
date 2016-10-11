@@ -29,5 +29,10 @@ namespace Jueci.MobileWeb.Lottery.Impl
         {
             return _lotteryPlanProcessor.GetUserPlanDetail(id, cpType);
         }
+
+        public ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType)
+        {
+            return _lotteryPlanProcessor.GetUserPlanDetailPosition( id, planName, cpType);
+        }
     }
 }

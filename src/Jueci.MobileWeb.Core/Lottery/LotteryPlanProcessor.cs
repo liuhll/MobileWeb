@@ -118,6 +118,49 @@ namespace Jueci.MobileWeb.Lottery
             return new ResultMessage<IList<UserPlanDetail>>(userPlanDetail);
         }
 
+        public ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType)
+        {
+            var planComptionInfoList = UpdateComptionInfo(id, cpType);
+            if (!IsHaveDMSMResult(planComptionInfoList))
+            {
+                return new ResultMessage<UserPlanDetail>(ResultCode.Fail, MessageTips.NoDmsmResult);
+            }
+            var planDetail = planComptionInfoList.FirstOrDefault(pc => pc.Plan.Name.Equals(planName));
+            if (planDetail == null)
+            {
+                return new ResultMessage<UserPlanDetail>(ResultCode.Fail, string.Format(MessageTips.NoThisPlanDetail,planName));
+            }
+
+            var pret = planDetail.GetResultProperties();
+
+            var userPlanDetail = new UserPlanDetail()
+            {
+                PlanName = planDetail.Plan.Name,
+                RightRate = pret.Accuracy,
+                MaxAlwaysRight = pret.MaxLianDui,
+                MaxAlwaysWrong = pret.MaxLianCuo,
+                CurrentROrW = pret.CurrentLianDui,
+                // :todo
+                RightTimes = pret.CycleTrue,
+                PlanDetails = planDetail.DMSMResultList.Select(dmsmResultItem => new PlanDetailList()
+                {
+                    ////064-066期|1 2 5 7|2|065|22049|对,
+                    CycleName = dmsmResultItem.GetPlanRegionString(),
+                    LotteryResult = dmsmResultItem.ActualEndData,//
+                    DsType = planDetail.Plan.DSType,
+                    EndIndex = dmsmResultItem.ActualEndTermIndex + 1,
+                    CurrentCycleName = dmsmResultItem.GetPlanActualEndTerm(),
+                    GuessValue = dmsmResultItem.GetDMSMForecastString(),
+                    RightOrWrong = dmsmResultItem.GetPlanResultString(),
+
+                }).ToList(),
+
+            };
+
+            return new ResultMessage<UserPlanDetail>(userPlanDetail);
+
+        }
+
 
         private List<PlanComputionInfo> UpdateComptionInfo(string id, CPType cpType)
         {
