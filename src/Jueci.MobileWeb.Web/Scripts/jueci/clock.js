@@ -32,6 +32,15 @@
 
     }
 
+    clock.getEndDate = function (endDateStr) {
+        
+        var endDate = new Date(endDateStr);
+        if (isNaN(endDate.getTime())) {
+            endDate = new Date(endDateStr.replace(/-/g, '/'));
+        }
+        return endDate;
+    }
+
     return clock;
 })();
 
