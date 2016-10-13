@@ -14,7 +14,7 @@
     @foreach (var lvItem in Model.PlanDetails.Take(Model.PlanDetails.Count - 1).OrderByDescending(p => p.CurrentCycleName))
     {
         <li data-icon="false">
-            <a class="ui-content-trans" href="">
+            <div class="ui-content-trans">
                 <div class="tab-lv-item-first">
                     <span>@lvItem.CycleName</span>
                     <span class="font-emphasize">预</span>
@@ -31,7 +31,7 @@
                         @lvItem.RightOrWrong
                     </span>
                 </div>
-            </a>
+            </div>
         </li>
     }
 

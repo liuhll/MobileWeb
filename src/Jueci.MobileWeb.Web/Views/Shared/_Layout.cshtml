@@ -1,6 +1,7 @@
 ﻿@using System.Threading
 @using System.Web.Optimization
 @using Abp.Timing
+@using Jueci.MobileWeb.Web.Views
 @{
     SetAntiForgeryCookie();
     bool isHomePage = ViewBag.IsHomePage ?? false;
@@ -9,7 +10,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -19,6 +20,10 @@
 
     @Styles.Render("~/Bundles/vendor/css")
     <link href="~/Content/ssc/layout.css" rel="stylesheet"/>
+    @*@if (!BrowerChecker.IsMoblie(Request))
+    {
+        <link href="~/Content/ssc/pclayout.css" rel="stylesheet" />
+    }*@
 
     <!-- View specific styles -->
     @RenderSection("styles", required: false)
@@ -38,23 +43,27 @@
 
 </head>
 <body>
+@*<div id="wrap">
+
+</div>*@
 <div data-role="page">
-    @if (isHomePage)
-    { 
-        @Html.Partial("_HeadCloth")
-    }
-    else
-    {
-        @Html.Partial("_HeadCommon")
-    }
-   
-    <div data-role="content" class="content-body">
-        @RenderBody()
+    <div id="wrap">
+        @if (isHomePage)
+        {
+            @Html.Partial("_HeadCloth")
+        }
+        else
+        {
+            @Html.Partial("_HeadCommon")
+        }
+
+        <div data-role="content" class="content-body">
+            @RenderBody()
+        </div>
     </div>
+  
 </div>
-
-
     <!-- View specific scripts -->
-    @RenderSection("scripts", required: false)
+@RenderSection("scripts", required: false)
 </body>
 </html>

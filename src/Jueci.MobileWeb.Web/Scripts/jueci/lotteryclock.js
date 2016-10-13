@@ -7,7 +7,7 @@ function nextLotteryClock() {
     var _interval = 1000;
     
     var nextLotteryTime = Clock.countdown(Clock.getEndDate($('#NextPeriodTimePoint').val()));
-       console.log(nextLotteryTime);
+      // console.log(nextLotteryTime);
     var timer = null;
     if (!nextLotteryTime.isRequestServer) {
         if (nextLotteryTime.hour.isNeedDisplay) {

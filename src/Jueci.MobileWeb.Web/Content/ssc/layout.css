@@ -4,7 +4,9 @@
     font-weight: 300;
 }
 
-*{ margin:0; padding:0; list-style:none;}
+body,div{ margin:0; padding:0;}
+
+*{ margin:0; padding:0;}
 img{ border:none;}
 
 .number-circle {
@@ -327,3 +329,23 @@ ol, ul, li {
 }
 
 
+@media all and (min-width: 1000px) {
+  #wrap {
+      width:800px; 
+      margin:0 auto;
+     
+   }
+  .ui-content {
+       overflow:scroll;
+      overflow-y: hidden;
+      overflow-x: hidden;
+
+  }
+  }
+
+  
+  @media screen and (min-width: 1000px) {
+       .ui-page {
+    background-color: #f6f6f6 !important;
+}	
+  }
