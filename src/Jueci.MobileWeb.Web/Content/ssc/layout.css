@@ -232,8 +232,9 @@ img{ border:none;}
 .tab-section1
  {
      padding: 6px 0;
-     border-bottom: 1px solid #d3d3d3; 
+     /*border-bottom: 1px solid #d3d3d3;*/ 
      border-top: 1px solid #d3d3d3;
+     /*margin-bottom: 5px;*/
 }
  .tab-section1-first{
     margin: 3px 0;
@@ -244,7 +245,7 @@ img{ border:none;}
  }
 
  .tab-section1-second {
-      margin: 8px 0 4px 2px;
+      margin: 4px 0 4px 2px;
       padding-top: 5px;
       
   }
@@ -255,7 +256,8 @@ img{ border:none;}
  }
 
 .tab-section1-three {
-    margin-bottom: -13px;
+    /*margin-bottom: -10px;*/
+    /*padding-bottom: -5px;*/
 }
 
 .tab-section1-three span {
@@ -265,7 +267,7 @@ img{ border:none;}
 .tab-section2 {
     background: #f8ffb6; 
     padding: 0 2px; 
-    border-bottom: 1px solid #d3d3d3;
+    /*border-bottom: 1px solid #d3d3d3;*/
     border-top: 1px solid #d3d3d3;
 }
 
