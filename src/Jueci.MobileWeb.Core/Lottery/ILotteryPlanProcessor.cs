@@ -19,5 +19,9 @@ namespace Jueci.MobileWeb.Lottery
         ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, CPType cpType);
 
         ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType);
+
+        ResultMessage<bool> UpdateUserPlanCache(CPType cpType, LotteryPlanLib lotteryPlanLib);
+
+       // ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType);
     }
 }

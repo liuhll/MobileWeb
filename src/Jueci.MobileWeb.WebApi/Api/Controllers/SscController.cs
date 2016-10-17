@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using Abp.Web.Security.AntiForgery;
 using Abp.WebApi.Controllers;
 using Camew.Lottery;
+using Camew.Lottery.AppService;
 using Jeuci.SalesSystem.Entities.Common;
 using Jueci.MobileWeb.Lottery;
+using Jueci.MobileWeb.Lottery.Models;
 using Jueci.MobileWeb.Lottery.Models.Transfer;
 
 namespace Jueci.MobileWeb.Api.Controllers
@@ -37,7 +40,7 @@ namespace Jueci.MobileWeb.Api.Controllers
         [Route("{id:string}")]
         public ResultMessage<IList<UserPlanInfo>> UserPlan(string id)
         {
-            return _lotteryPlanAppService.GetUserPlanInfos("201600927001", CPType.cqssc);
+            return _lotteryPlanAppService.GetUserPlanInfos(id, CPType.cqssc);
         }
 
         /// <summary>
@@ -62,15 +65,22 @@ namespace Jueci.MobileWeb.Api.Controllers
         [HttpGet]
         public ResultMessage<IList<UserPlanDetail>> UserPlanDetail(string id)
         {
-            return _lotteryPlanAppService.GetUserPlanDetail("201600927001", CPType.cqssc);
+            return _lotteryPlanAppService.GetUserPlanDetail(id, CPType.cqssc);
         }
 
-        //[HttpGet]
-        //[Route("plan/{id:string}")]      
-        //public IList<UserPlanInfo> GetUserPlanInfos(string id)
-        //{
-        //    return _lotteryPlanAppService.GetUserPlanInfos("201600927001", CPType.cqssc);
-        //}
+        /// <summary>
+        /// 更新用户计划缓存接口
+        /// </summary>
+        /// <param name="lotteryPlanLib"></param>
+        /// <returns>是否更新成功</returns>
+        /// <remarks>获取用户分享计划信息详情，当用户计划更改时，需要条用该接口，更新缓存中的计划信息</remarks> 
+        [HttpPost,HttpPut]
+        [DisableAbpAntiForgeryTokenValidation]
+        public ResultMessage<bool> UpdateUserPlanCache([FromBody] LotteryPlanLib lotteryPlanLib)
+        {
+            return _lotteryPlanAppService.UpdateUserPlanCache(CPType.cqssc, lotteryPlanLib);
+        }
+
 
     }
 }

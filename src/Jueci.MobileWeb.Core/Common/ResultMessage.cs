@@ -13,7 +13,7 @@ namespace Jeuci.SalesSystem.Entities.Common
     /// </summary>
     /// <typeparam name="TData">返回的消息数据</typeparam>
     public class ResultMessage<TData>
-        where TData : class
+     //   where TData : class 
     {
 
 

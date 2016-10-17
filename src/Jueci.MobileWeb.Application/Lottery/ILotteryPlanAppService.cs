@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using Abp.Application.Services;
 using Camew.Lottery;
+using Camew.Lottery.AppService;
 using Jeuci.SalesSystem.Entities.Common;
+using Jueci.MobileWeb.Lottery.Models;
 using Jueci.MobileWeb.Lottery.Models.Transfer;
 
 namespace Jueci.MobileWeb.Lottery
@@ -15,5 +17,9 @@ namespace Jueci.MobileWeb.Lottery
         ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, CPType cpType);
 
         ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType);
+
+        ResultMessage<bool> UpdateUserPlanCache(CPType cpType, LotteryPlanLib lotteryPlanLib);
+
+        //ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType);
     }
 }

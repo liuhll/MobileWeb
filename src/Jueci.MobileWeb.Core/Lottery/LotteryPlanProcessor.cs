@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Camew.Lottery;
 using Camew.Lottery.AppService;
 using Jeuci.SalesSystem.Entities.Common;
 using Jueci.MobileWeb.Common;
 using Jueci.MobileWeb.Common.Enums;
+using Jueci.MobileWeb.Lottery.Models;
 using Jueci.MobileWeb.Lottery.Models.Transfer;
 using Jueci.MobileWeb.Lottery.Service;
 
@@ -161,18 +163,31 @@ namespace Jueci.MobileWeb.Lottery
 
         }
 
+        public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, LotteryPlanLib lotteryPlanLib)
+        {
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var planComputionInfos = lotteryEngine.ConvertPCListFromXml(XElement.Parse(lotteryPlanLib.PlanComputionInfo));
+            return new ResultMessage<bool>(_lotteryPlanManager.UpdateUserLotteryPlan(lotteryPlanLib.Id, planComputionInfos));
+        }
+
+        public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)
+        {
+            var planComputionInfos = UpdateComptionInfo(id,cpType);
+            return new ResultMessage<List<PlanComputionInfo>>(planComputionInfos);
+        }
+
 
         private List<PlanComputionInfo> UpdateComptionInfo(string id, CPType cpType)
         {
-            var sscLotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
             bool isNeedUpdateCache = false;
-            var planComptionInfoList = _lotteryPlanManager.GetComputionInfos(id, sscLotteryEngine, ref isNeedUpdateCache);
+            var planComptionInfoList = _lotteryPlanManager.GetComputionInfos(id, lotteryEngine, ref isNeedUpdateCache);
 
             if (isNeedUpdateCache)
             {
                 _lotteryPlanManager.UpdateUserLotteryPlan(id, planComptionInfoList);
             }
-            sscLotteryEngine.ComputeLotteryPlans(planComptionInfoList);
+            lotteryEngine.ComputeLotteryPlans(planComptionInfoList);
             return planComptionInfoList;
         }
 
