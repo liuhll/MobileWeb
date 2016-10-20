@@ -70,6 +70,17 @@
         $(".sideline").animate({ left: $(this).position().left }, 300);
         $(".sideline").animate({ width: nav_w });
         $(this).addClass("find_nav_cur").siblings().removeClass("find_nav_cur");
+ 
+        $(this)
+            .find('span')
+            .removeClass("'clock-hide")
+            .addClass('stress-dot')
+            ;
+        $(this).siblings().find('span')
+            .removeClass("stress-dot")
+            .addClass('clock-hide')
+            ;
+
         var fn_w = ($(".find_nav").width() - nav_w) / 2;
         var fnl_l;
         var fnl_x = parseInt($(this).position().left);

@@ -57,14 +57,14 @@
 }
 
 .find_nav_cur > a {
-    color: red !important;
+    color:  #D63138 !important;
 }
 .sideline {
     display: block;
     position: absolute;
     border: 0;
     height: 2px;
-    background-color: red;
+    background-color:  #D63138;
     left: 0;
     top: 43px;
     pointer-events: none;
@@ -76,5 +76,5 @@
     line-height: 45px;
     text-align: center;
     font-size: 15px;
-    color: red;
+    color:  #D63138;
 }

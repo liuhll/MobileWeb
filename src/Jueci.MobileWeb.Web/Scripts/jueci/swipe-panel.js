@@ -38,6 +38,7 @@ function switchPlanDetailTab(beferTabIndex, currentTabIndex) {
     $('.ui-state-default[data-tabindex=' + beferTabIndex + ']').removeClass("ui-state-hover ui-state-focus ui-tabs-active ui-state-active  find_nav_cur");
     $('.ui-state-default[data-tabindex=' + beferTabIndex + ']').attr('aria-selected', "false");
     $('.ui-state-default[data-tabindex=' + beferTabIndex + '] > a').removeClass("ui-btn-active");
+    $('.ui-state-default[data-tabindex=' + beferTabIndex + '] > span').removeClass("stress-dot").addClass('clock-hide');
     $('#tab' + beferTabIndex).attr('style', 'background: rgb(255, 255, 255); padding: 0px; display: none;');
     $('#tab' + beferTabIndex).attr('aria-expanded', 'false');
     $('#tab' + beferTabIndex).attr('aria-hidden', 'true');
@@ -46,6 +47,7 @@ function switchPlanDetailTab(beferTabIndex, currentTabIndex) {
     $('.ui-state-default[data-tabindex=' + currentTabIndex + ']').addClass("ui-state-hover ui-state-focus ui-tabs-active ui-state-active find_nav_cur");
     $('.ui-state-default[data-tabindex=' + currentTabIndex + ']').attr('aria-selected', "true");
     $('.ui-state-default[data-tabindex=' + currentTabIndex + '] > a').addClass("ui-btn-active");
+    $('.ui-state-default[data-tabindex=' + currentTabIndex + '] > span').removeClass("clock-hide").addClass('stress-dot');
     $('#tab' + currentTabIndex).attr('style', 'background: #ffffff; padding: 0 0;');
     $('#tab' + currentTabIndex).attr('aria-expanded', 'true');
     $('#tab' + currentTabIndex).attr('aria-hidden', 'false');

@@ -9,6 +9,7 @@
 @foreach (var item in Model)
 {
     <li class="@Html.Raw(tabIndex == currentTabIndex ? "ui-tabs-active ui-state-active find_nav_cur" : "")" data-tabindex="@tabIndex">
+        <span class="@Html.Raw(tabIndex == currentTabIndex ? "stress-dot" : "clock-hide")" >•</span>
         <a class="ui-btn-table @Html.Raw(tabIndex == currentTabIndex ? "ui-btn-active" : "")" data-transition="slide"
            href="@Html.Raw(string.Format("#tab{0}", tabIndex))">@item.PlanName</a>
     </li>
