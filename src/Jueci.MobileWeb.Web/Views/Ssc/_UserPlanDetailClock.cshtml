@@ -27,17 +27,17 @@
 <div class="tab-section1-three fr">
     <span class="number-circle number-circle-blue-small">1</span>
     <span>@Html.Raw(string.Format("{0}期", Model.UserPlanDetail.PlanDetails.LastOrDefault().CurrentCycleName))</span>
-    <span><img width="14" height="14" src="~/images/icon/clock@2x.png" alt="sj2" /></span>
+    <span class="clock-img-container"><img class="clock-section-3" src="~/images/icon/clock@2x.png" alt="sj2" /></span>
     <span>
         <div class="countdown-number-content fr">
-            <div id="@Html.Raw(string.Format("nextPeriodDisplay{0}", Model.TabIndex))" class="font-face clock-hide" style="font-size: 14px;font-weight: normal"></div>
+            <div id="@Html.Raw(string.Format("nextPeriodDisplay{0}", Model.TabIndex))" class="font-face clock-hide" style="font-size: 12px;font-weight: normal"></div>
 
             <div id="@Html.Raw(string.Format("hourTenNumber{0}", Model.TabIndex))" class="hour countdown-number clock fl clock-hide">0</div>
             <div id="@Html.Raw(string.Format("hourUnitNumber{0}", Model.TabIndex))" class="hour countdown-number clock fl clock-hide">0</div>
-            <div class="hour clock fl hide clock-hide">:</div>
+            <div class="hour clock fl hide clock-hide clock-space">:</div>
             <div id="@Html.Raw(string.Format("minuteTenNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
             <div id="@Html.Raw(string.Format("minuteUnitNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
-            <div class="clock fl">:</div>
+            <div class="clock fl clock-space">:</div>
             <div id="@Html.Raw(string.Format("secondTenNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
             <div id="@Html.Raw(string.Format("secondUnitNumber{0}", Model.TabIndex))" class="countdown-number clock fl">0</div>
         </div>

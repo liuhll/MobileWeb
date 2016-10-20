@@ -10,7 +10,7 @@
 <div data-role="content" class="header-background">
     @Html.Hidden("NextPeriodTimePoint", Model.NextPeriodTimePointDisplay)
     @Html.Hidden("CurrentPeriod", Model.CurrentPeriod)
-    <img src="~/images/icon/sj1.png" alt="sj1"/>
+    <img style="width: 15px; height: 14px;margin-bottom: -2px" src="~/images/icon/sj1@3x.png" alt="sj1"/>
     <span id="CurrentPeriodDisplay" class="font-info">@Html.Raw(Model.CurrentPeriodDisplay)</span>
     <div style="margin-top: 10px">
         @foreach (var item in Model.LotteryResult)
@@ -20,15 +20,15 @@
 
     </div>
     <div class="countdown-content">
-        <img class="countdown-img fl" src="~/images/icon/sj2.png" alt="sj2"/>
+        <img class="countdown-img fl" src="~/images/icon/sj2@3x.png" alt="sj2"/>
         <span id="NextPeriodDisplay" class="font-info countdown-title fl">@Html.Raw(Model.NextPeriodDisplay)</span>
         <div class="countdown-number-content">
             <div id="hourTenNumber" class="hour countdown-number fl clock-hide">0</div>
             <div id="hourUnitNumber" class="hour countdown-number fl clock-hide">0</div>
-            <div class="hour fl hide clock-hide">:</div>
+            <div class="hour fl hide clock-hide clock-space">:</div>
             <div id="minuteTenNumber" class="countdown-number fl">0</div>
             <div id="minuteUnitNumber" class="countdown-number fl">0</div>
-            <div class="fl">:</div>
+            <div class="fl clock-space">:</div>
             <div id="secondTenNumber" class="countdown-number fl">0</div>
             <div id="secondUnitNumber" class="countdown-number fl">0</div>
 
