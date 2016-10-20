@@ -157,7 +157,7 @@ img {
     font-size: 12px;
     font-weight: 800;
     line-height: 14px;
-    padding-top: 2.5px;
+    padding-top: 3.5px;
     color: #878787;
 }
 
@@ -273,11 +273,13 @@ img {
 
 .stress-dot {
     color: #D63138;
-    font-weight: 800;
+    /*font-weight:800;*/
     display: inline-block;
-    line-height: 18px;
-    margin-right: -3px;
-    padding-bottom: 3px;
+    /*line-height: 18px;*/
+    font-size: 11px;
+    margin-right: -4px;
+    padding-bottom: 4px;
+    vertical-align: middle;
 }
 
 .ui-btn-table {
@@ -387,7 +389,7 @@ img {
     /*padding: 6px 0;*/
     border-bottom: 1px solid #EFEFEF !important;
     /*border-top: 1px solid #EFEFEF !important;*/
-    color: #878787;
+    /*color: #878787;*/
 }
 
 .tab-lv {
@@ -450,7 +452,10 @@ ol, ul, li {
 @media all and (min-width: 1000px) {
     #wrap {
         width: 800px;
+        min-height: 800px;
         margin: 0 auto;
+        border-right: 1px solid #b0c4de !important;
+        border-left: 1px solid #b0c4de !important;
     }
 
     .ui-content {
@@ -458,11 +463,23 @@ ol, ul, li {
         overflow-y: hidden;
         overflow-x: hidden;
     }
-}
 
-
-@media screen and (min-width: 1000px) {
-    .ui-page {
+ .ui-page {
         background-color: #f6f6f6 !important;
     }
+ .lv-item-title {
+     color: #3C3C3C;
+ }
+ .lv-item-q {
+     color: #3C3C3C;
+ }
+
+ .tab-section1,.tab-section2,.tab-section3,.tab-lv-item-fi,.tab-lv-item-first,.tab-lv-item-second {
+     color: #3C3C3C;
+ }
+
+
+
 }
+
+

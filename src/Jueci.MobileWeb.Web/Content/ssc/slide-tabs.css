@@ -33,9 +33,9 @@
 }
 .find_nav_list ul li {
     display: inline-block;
-    padding: 0 13px;
+    padding: 0 13px 0 8px;
     background: #F9F9F9;
-    border: none !important;
+    border: none;
 }
 .find_nav_list ul li a {
     display: inline-block;
