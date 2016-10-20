@@ -13,10 +13,11 @@
 
             @Html.Partial("_UserPlanDetailClock", new UserPlanDetailClock(tabIndex,item))
         </div>
-        <div id="@Html.Raw(string.Format("tab-section2-{0}",tabIndex))" class="tab-section2">
-          
-            @Html.Partial("_UserPlanDetailInfo",item)
+        <div id="@Html.Raw(string.Format("tab-section2-{0}", tabIndex))" class="tab-section2">
+
+            @Html.Partial("_UserPlanDetailInfo", item)
         </div>
+        <div class="tab-section-space"></div>
         <div id="@Html.Raw(string.Format("tab-section3-{0}", tabIndex))" class="tab-section3">
             
             @Html.Partial("_UserPlanDetailList", item)

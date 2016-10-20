@@ -6,17 +6,18 @@
 }
 
 <div class="tab-section2-line">
-    <div class="fl"><span>准确率</span><span class="font-emphasize">@Html.Raw(string.Format("{0}%", Model.RightRate * 100))</span></div>
-    <div class="fl"><span>最大连对</span><span class="font-emphasize">@Model.MaxAlwaysRight</span></div>
-    <div class="fl"><span>最大连错</span><span class="font-emphasize">@Model.MaxAlwaysWrong</span></div>
-    <div class="fl"><span>当前连对/错</span><span class="font-emphasize">@Model.CurrentROrW</span></div>
+    <div class="fl tab-section2-sect"><span>准确率</span><span class="font-emphasize">@Html.Raw(string.Format("{0}%", Model.RightRate * 100))</span></div>
+    <div class="fl tab-section2-sect"><span>最大连对</span><span class="font-emphasize">@Model.MaxAlwaysRight</span></div>
+    <div class="fl tab-section2-sect"><span>最大连错</span><span class="font-emphasize">@Model.MaxAlwaysWrong</span></div>
+    <div class="fl tab-section2-sect"><span>当前连对/错</span><span class="font-emphasize">@Model.CurrentROrW</span></div>
+    <div class="fl tab-section2-sect"><span>第1期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[0]))</span></div>
+    <div class="fl tab-section2-sect"><span>第2期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[1]))</span></div>
+    <div class="fl tab-section2-sect"><span>第3期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[2]))</span></div>
+
     <div class="clearfix"></div>
 </div>
 
-<div class="tab-section2-line">
-    <div class="fl"><span>第1期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[0]))</span></div>
-    <div class="fl"><span>第2期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[1]))</span></div>
-    <div class="fl"><span>第3期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[2]))</span></div>
-
+@*<div class="tab-section2-line">
+   
     <div style="clear: both"></div>
-</div>
+</div>*@

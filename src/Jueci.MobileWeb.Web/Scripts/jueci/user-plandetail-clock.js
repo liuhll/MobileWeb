@@ -86,7 +86,7 @@ function getNewLottery() {
                 $('.clock').addClass('clock-hide');
                 $('div[id*=nextPeriodDisplay]').removeClass('clock-hide');
 
-                $('div[id*=nextPeriodDisplay]').text("第" + lotteryData["nextPeriod"] + "期正在开奖,请稍等...");
+                $('div[id*=nextPeriodDisplay]').text("开奖中,请稍等...");
                 setTimeout("getNewLottery();", _interval * 3);
 
             }

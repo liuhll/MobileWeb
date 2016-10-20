@@ -401,6 +401,7 @@
     <Content Include="Content\flags\famfamfam-flags.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="images\icon\back%403x.png" />
     <Content Include="images\icon\clock%402x.png" />
     <Content Include="images\icon\clock%403x.png" />
     <Content Include="images\icon\clock.png" />
@@ -409,9 +410,12 @@
     <Content Include="images\icon\glzhax.png" />
     <Content Include="images\icon\jhfa.png" />
     <Content Include="images\icon\jhzh.png" />
+    <Content Include="images\icon\plan.png" />
     <Content Include="images\icon\sha.png" />
+    <Content Include="images\icon\sj1%403x.png" />
     <Content Include="images\icon\sj1.png" />
     <Content Include="images\icon\sj2%402x.png" />
+    <Content Include="images\icon\sj2%403x.png" />
     <Content Include="images\icon\sj2.png" />
     <Content Include="images\icon\wo.png" />
     <Content Include="images\icon\woax.png" />

@@ -10,7 +10,7 @@
     <script src="~/Abp/Lib/jquery.mobile/jquery.mobile-1.4.5.js"></script>
 }
 
-<ul data-role="listview" class="tab-lv" data-divider-theme="a">
+<ul data-role="listview" class="tab-lv" @*data-divider-theme="a"*@>
     @foreach (var lvItem in Model.PlanDetails.Take(Model.PlanDetails.Count - 1).OrderByDescending(p => p.CurrentCycleName))
     {
         <li data-icon="false">
