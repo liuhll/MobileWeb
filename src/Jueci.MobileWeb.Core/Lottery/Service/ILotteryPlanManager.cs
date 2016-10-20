@@ -11,5 +11,6 @@ namespace Jueci.MobileWeb.Lottery.Service
 
 
         List<PlanComputionInfo> GetComputionInfos(string id, LotteryEngine sscLotteryEngine,ref bool isNeedUpdateCache);
+
     }
 }
