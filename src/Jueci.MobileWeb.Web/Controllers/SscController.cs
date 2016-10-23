@@ -8,6 +8,7 @@ using Jueci.MobileWeb.Lottery;
 using Jueci.MobileWeb.Ssc;
 using Camew.Lottery;
 using Jueci.MobileWeb.Common.Enums;
+using Jueci.MobileWeb.Common.Tools;
 using Jueci.MobileWeb.Web.Models.Common;
 using Jueci.MobileWeb.Web.Models.UserPlanDetail;
 
@@ -32,6 +33,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             {
                 return new HttpNotFoundResult(userPlanInfo.Msg);
             }
+            ViewBag.OfficialWebsite = ConfigHelper.GetValuesByKey("OfficialWebsite");
             ViewBag.PlanId = id;
             return View(userPlanInfo.Data);
         }
