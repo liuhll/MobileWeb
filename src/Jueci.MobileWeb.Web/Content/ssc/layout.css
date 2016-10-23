@@ -41,7 +41,7 @@ img {
     border: 1px solid;
     width: 25px;
     height: 25px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .number-circle-small {
@@ -163,7 +163,7 @@ img {
 
 .lv-item-progress-box {
     float: right;
-    margin-right: 1px;
+    margin-right: 2px;
     display: inline-block;
     vertical-align: middle;
 }
@@ -400,7 +400,7 @@ img {
     font-size: 14px;
     font-weight: 400;
     color: #878787;
-    padding-left: 3px;
+    padding-left: 2px;
 }
 
 .tab-lv-item-second {
@@ -450,15 +450,18 @@ ol, ul, li {
 }
 
 @media all and (min-width: 1000px) {
-    #wrap {
+ #wrap {
         width: 800px;
-        min-height: 800px;
+        /*min-height: 800px;*/
         margin: 0 auto;
-        border-right: 1px solid #b0c4de !important;
-        border-left: 1px solid #b0c4de !important;
+        border-right: 1px solid #DDDDDD !important;
+        border-left: 1px solid #DDDDDD !important;
+        border-bottom: 1px solid #DDDDDD !important;
     }
-
-    .ui-content {
+.ui-tabs {
+    padding: 0;
+}
+.ui-content {
         overflow: scroll;
         overflow-y: hidden;
         overflow-x: hidden;
@@ -476,10 +479,41 @@ ol, ul, li {
 
  .tab-section1,.tab-section2,.tab-section3,.tab-lv-item-fi,.tab-lv-item-first,.tab-lv-item-second {
      color: #3C3C3C;
+     font-weight: normal;
  }
 
+ .lv-item-progress-box {
+     margin-right: 13px;    
+ }
 
+ .tab-section1,.tab-section2,.tab-section3 {
+     padding-left: 10px;
+     padding-right: 10px; 
+ }
 
+ .tab-section3 {
+     padding-bottom: 12px;
+ }
+
+ .tab-section1-three {
+     margin-right: 1px;
+ }
+ .number-circle-normal {
+     border: 2px solid;
+ }
+ .tab-lv-item-first span{
+      margin: 0 2px;
+      padding: 0 2px;
+ }
+ .tab-section1-first {
+     padding-right: 4px;
+ }
+ .tab-section2-sect {
+     width: 90px;
+ }
+ .listview-content {
+     margin-bottom: 0 !important;
+ }
 }
 
 
