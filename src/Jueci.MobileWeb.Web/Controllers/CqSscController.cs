@@ -14,12 +14,12 @@ using Jueci.MobileWeb.Web.Models.UserPlanDetail;
 
 namespace Jueci.MobileWeb.Web.Controllers
 {
-    public class SscController : MobileWebControllerBase
+    public class CqSscController : MobileWebControllerBase
     {
 
         private readonly ILotteryPlanAppService _sscPlanAppService;
 
-        public SscController(ILotteryPlanAppService sscPlanAppService)
+        public CqSscController(ILotteryPlanAppService sscPlanAppService)
         {
             _sscPlanAppService = sscPlanAppService;
         }

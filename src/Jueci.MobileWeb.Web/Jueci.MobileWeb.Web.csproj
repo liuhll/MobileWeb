@@ -510,7 +510,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SscController.cs" />
+    <Compile Include="Controllers\CqSscController.cs" />
     <Compile Include="Models\Common\ClockPage.cs" />
     <Compile Include="Models\Layout\LanguageSelectionViewModel.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
@@ -535,16 +535,16 @@
     <Content Include="Scripts\sweetalert\sweet-alert.scss" />
     <Content Include="Views\Shared\_HeadCloth.cshtml" />
     <Content Include="Views\Shared\_HeadCommon.cshtml" />
-    <None Include="Views\Ssc\Planshare.cshtml" />
-    <Content Include="Views\Ssc\PlanDetails.cshtml" />
-    <Content Include="Views\Ssc\_Clock.cshtml" />
-    <Content Include="Views\Ssc\_UserPlanInfoList.cshtml" />
-    <Content Include="Views\Ssc\_UserPlanDetailTabs.cshtml" />
-    <Content Include="Views\Ssc\_UserPlanDetailContent.cshtml" />
-    <Content Include="Views\Ssc\_PlanningDetailClock.cshtml" />
-    <Content Include="Views\Ssc\_UserPlanDetailList.cshtml" />
-    <Content Include="Views\Ssc\_UserPlanDetailInfo.cshtml" />
-    <Content Include="Views\Ssc\_UserPlanDetailClock.cshtml" />
+    <None Include="Views\CqSsc\Planshare.cshtml" />
+    <Content Include="Views\CqSsc\PlanDetails.cshtml" />
+    <Content Include="Views\CqSsc\_Clock.cshtml" />
+    <Content Include="Views\CqSsc\_UserPlanInfoList.cshtml" />
+    <Content Include="Views\CqSsc\_UserPlanDetailTabs.cshtml" />
+    <Content Include="Views\CqSsc\_UserPlanDetailContent.cshtml" />
+    <Content Include="Views\CqSsc\_PlanningDetailClock.cshtml" />
+    <Content Include="Views\CqSsc\_UserPlanDetailList.cshtml" />
+    <Content Include="Views\CqSsc\_UserPlanDetailInfo.cshtml" />
+    <Content Include="Views\CqSsc\_UserPlanDetailClock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
