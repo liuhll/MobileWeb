@@ -179,10 +179,14 @@ namespace Jueci.MobileWeb.Lottery
 
             if (!planlibPolicy.IsValidTime())
             {
+
+                LogHelper.Logger.Warn(MessageTips.NotValidTime);
                 return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NotValidTime, false);
             }
             if (!planlibPolicy.IsLegalSign())
             {
+
+                LogHelper.Logger.Warn(MessageTips.NotValidTime);
                 return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NotLegalSign, false);
             }
 
