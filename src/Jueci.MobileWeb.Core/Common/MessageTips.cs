@@ -16,5 +16,15 @@ namespace Jueci.MobileWeb.Common
         public const string WaitingServiceStart = "应用正在启动,请稍后尝试!";
 
         public const string NoThisPlanDetail = "没有该名称为{0}的计划信息!";
+
+        public const string NoExitPlanLib = "不存在该计划库，请检查的您的Uid和Sid是否正确！";
+
+        public const string NotValidTime = "该请求的时间已经失效";
+
+        public const string NotLegalSign = "非法签名";
+
+        public const string StartCallApiLog = "开始调用{0}Api接口，参数值为{1}";
+
+        public const string EndCallApiLog = "接口{0}调用成功，返回值为{1}";
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using Abp.Domain.Repositories;
+using Abp.Logging;
 using Camew.Lottery;
 using Camew.Lottery.AppService;
 using Jeuci.SalesSystem.Entities.Common;
@@ -9,7 +11,9 @@ using Jueci.MobileWeb.Common;
 using Jueci.MobileWeb.Common.Enums;
 using Jueci.MobileWeb.Lottery.Models;
 using Jueci.MobileWeb.Lottery.Models.Transfer;
+using Jueci.MobileWeb.Lottery.Policy;
 using Jueci.MobileWeb.Lottery.Service;
+using Newtonsoft.Json;
 
 namespace Jueci.MobileWeb.Lottery
 {
@@ -19,12 +23,16 @@ namespace Jueci.MobileWeb.Lottery
         private readonly ILotteryServiceManager _lotteryServiceManager;
         private readonly ILotteryPlanManager _lotteryPlanManager;
 
+        private readonly IRepository<LotteryPlanLib, string> _lotteryPlanLibRepository;
+
         public LotteryPlanProcessor(
             ILotteryServiceManager lotteryServiceManager,
-            ILotteryPlanManager lotteryPlanManager)
+            ILotteryPlanManager lotteryPlanManager, 
+            IRepository<LotteryPlanLib, string> lotteryPlanLibRepository)
         {
             _lotteryServiceManager = lotteryServiceManager;
             _lotteryPlanManager = lotteryPlanManager;
+            _lotteryPlanLibRepository = lotteryPlanLibRepository;
         }
 
 
@@ -163,11 +171,42 @@ namespace Jueci.MobileWeb.Lottery
 
         }
 
-        public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, LotteryPlanLib lotteryPlanLib)
+        public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, PlanCacheArgs planCacheArgs)
         {
+            LogHelper.Logger.Info(string.Format(MessageTips.StartCallApiLog, "UpdateUserPlanCache",JsonConvert.SerializeObject(planCacheArgs)));
+            //检查请求的合法性
+            var planlibPolicy = new UpdateUserPlanLibPolicy(planCacheArgs);
+
+            if (!planlibPolicy.IsValidTime())
+            {
+                return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NotValidTime, false);
+            }
+            if (!planlibPolicy.IsLegalSign())
+            {
+                return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NotLegalSign, false);
+            }
+
+            var lotteryPlanLib =
+                _lotteryPlanLibRepository.Single(p => p.UId == planCacheArgs.Uid && p.SId == planCacheArgs.Sid);
             var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+
+            if (lotteryPlanLib == null)
+            {
+               return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NoExitPlanLib, false);
+            }
+
             var planComputionInfos = lotteryEngine.ConvertPCListFromXml(XElement.Parse(lotteryPlanLib.PlanComputionInfo));
-            return new ResultMessage<bool>(_lotteryPlanManager.UpdateUserLotteryPlan(lotteryPlanLib.Id, planComputionInfos));
+            try
+            {
+                var data = _lotteryPlanManager.UpdateUserLotteryPlan(lotteryPlanLib.Id, planComputionInfos);
+                LogHelper.Logger.Info(string.Format(MessageTips.EndCallApiLog, "UpdateUserPlanCache",data));
+                return new ResultMessage<bool>(data);
+            }
+            catch (Exception e)
+            {
+                LogHelper.Logger.Error(e.Message);
+                return new ResultMessage<bool>(ResultCode.ServiceError, e.Message, false);
+            }
         }
 
         public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)

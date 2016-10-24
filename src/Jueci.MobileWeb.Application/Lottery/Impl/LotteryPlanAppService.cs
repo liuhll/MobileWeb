@@ -37,9 +37,9 @@ namespace Jueci.MobileWeb.Lottery.Impl
             return _lotteryPlanProcessor.GetUserPlanDetailPosition( id, planName, cpType);
         }
 
-        public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, LotteryPlanLib lotteryPlanLib)
+        public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, PlanCacheArgs planCacheArgs)
         {
-            return _lotteryPlanProcessor.UpdateUserPlanCache(cpType, lotteryPlanLib);
+            return _lotteryPlanProcessor.UpdateUserPlanCache(cpType, planCacheArgs);
         }
 
         //public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)

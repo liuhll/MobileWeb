@@ -113,9 +113,12 @@
     <Compile Include="Common\Caches\ICacheObject.cs" />
     <Compile Include="Common\Caches\Impl\CacheDictionary.cs" />
     <Compile Include="Common\Enums\ResultCode.cs" />
+    <Compile Include="Common\JueciException.cs" />
     <Compile Include="Common\MessageTips.cs" />
     <Compile Include="Common\ResultMessage.cs" />
     <Compile Include="Common\Tools\ConfigHelper.cs" />
+    <Compile Include="Common\Tools\DateTimeHelper.cs" />
+    <Compile Include="Common\Tools\EncryptionHelper.cs" />
     <Compile Include="Lottery\Config\EngineAttachPropertyKey.cs" />
     <Compile Include="Lottery\Config\ServiceConfigName.cs" />
     <Compile Include="Lottery\Config\ServiceInitConfigName.cs" />
@@ -125,12 +128,14 @@
     <Compile Include="Lottery\LotteryPlanProcessor.cs" />
     <Compile Include="Lottery\Models\LotteryConfig.cs" />
     <Compile Include="Lottery\Models\LotteryPlanLib.cs" />
+    <Compile Include="Lottery\Models\PlanCacheArgs.cs" />
     <Compile Include="Lottery\Models\PlanComputionBase.cs" />
     <Compile Include="Lottery\Models\UserPlanComputionInfo.cs" />
     <Compile Include="Lottery\Models\Transfer\NewLottery.cs" />
     <Compile Include="Lottery\Models\Transfer\PlanDetailList.cs" />
     <Compile Include="Lottery\Models\Transfer\UserPlanDetail.cs" />
     <Compile Include="Lottery\Models\Transfer\UserPlanInfo.cs" />
+    <Compile Include="Lottery\Policy\UpdateUserPlanLibPolicy.cs" />
     <Compile Include="Lottery\Service\ILotteryPlanManager.cs" />
     <Compile Include="Lottery\Service\ILotteryServiceManager.cs" />
     <Compile Include="Lottery\Service\LotteryPlanManager\LotteryPlanManager.cs" />

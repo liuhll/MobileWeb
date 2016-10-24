@@ -71,14 +71,14 @@ namespace Jueci.MobileWeb.Api.Controllers
         /// <summary>
         /// 更新用户计划缓存接口
         /// </summary>
-        /// <param name="lotteryPlanLib"></param>
+        /// <param name="planCacheArgs"></param>
         /// <returns>是否更新成功</returns>
         /// <remarks>获取用户分享计划信息详情，当用户计划更改时，需要条用该接口，更新缓存中的计划信息</remarks> 
-        [HttpPost,HttpPut]
+        [HttpPost]
         [DisableAbpAntiForgeryTokenValidation]
-        public ResultMessage<bool> UpdateUserPlanCache([FromBody] LotteryPlanLib lotteryPlanLib)
+        public ResultMessage<bool> UpdateUserPlanCache([FromBody] PlanCacheArgs planCacheArgs)
         {
-            return _lotteryPlanAppService.UpdateUserPlanCache(CPType.cqssc, lotteryPlanLib);
+            return _lotteryPlanAppService.UpdateUserPlanCache(CPType.cqssc, planCacheArgs);
         }
 
 
