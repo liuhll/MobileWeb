@@ -33,10 +33,10 @@ namespace Jueci.MobileWeb.Web.Controllers
             {
                 return new HttpNotFoundResult(userPlanInfo.Msg);
             }
-            if (userPlanInfo.)
-            {
+            //if (userPlanInfo.)
+            //{
                 
-            }
+            //}
             ViewBag.OfficialWebsite = ConfigHelper.GetValuesByKey("OfficialWebsite");
             ViewBag.PlanId = id;
             return View(userPlanInfo.Data);

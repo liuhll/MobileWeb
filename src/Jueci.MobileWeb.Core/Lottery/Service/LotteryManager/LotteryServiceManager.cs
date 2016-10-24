@@ -7,7 +7,6 @@ using Camew;
 using Camew.Lottery;
 using Jueci.MobileWeb.Repositories;
 using Camew.Lottery.AppService;
-using System.Timers;
 using System.Xml.Linq;
 using Abp.Logging;
 using Camew.Extend;
@@ -35,8 +34,6 @@ namespace Jueci.MobileWeb.Lottery.Service
        // private readonly object lockObj = new object();
 
 
-        private Timer _moniteTimer;
-
         /// <summary>
         /// 获取指定服务的管理器
         /// </summary>
@@ -49,8 +46,8 @@ namespace Jueci.MobileWeb.Lottery.Service
 
         static LotteryServiceManager()
         {
-            Constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-            CPConstr = ConfigurationManager.ConnectionStrings["cpconstr"].ConnectionString;
+            //Constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
+            //CPConstr = ConfigurationManager.ConnectionStrings["cpconstr"].ConnectionString;
 
             cpTypeList = ConfigurationManager.AppSettings["CpTypeList"].Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries).Select(
                 x => (CPType)Enum.Parse(typeof(CPType), x)).ToList();
@@ -91,6 +88,7 @@ namespace Jueci.MobileWeb.Lottery.Service
 
                     var lotteryServiceInfo = new LotteryServiceInfo(lotteryLotteryEngine);
                     lotteryServiceInfo.UpdateLotteryData.UpdateLotteryEventHandler += UpdateLotteryDataEventHandler;
+                    lotteryServiceInfo.UpdateLotteryData.CallUpdateLotterEventHandler();
                      _LotteryEngineManagers.Add(cpType, lotteryServiceInfo);
 
                     LogHelper.Logger.Info("服务 " + GetServiceName(cpType) + " 初始化成功。");
@@ -104,7 +102,7 @@ namespace Jueci.MobileWeb.Lottery.Service
             lock (_LotteryEngineManagers)
             {
                 var lotteryEngine = e.LotteryEngine;
-                LogHelper.Logger.Info(string.Format("定时执行更新彩票数据，彩票类型：{0}", e.LotteryEngine.Lottery.Name));
+               // LogHelper.Logger.Info(string.Format("定时执行更新彩票数据，彩票类型：{0}", e.LotteryEngine.Lottery.Name));
                 if (!lotteryEngine.CheckNeedUpdateData()) return;
                 //从引擎的附加属性中获取强制更新全部开奖数据的标识
                 object latestDataFlag = lotteryEngine.AttachProperties[EngineAttachPropertyKey.LATESTDATAFLAG];

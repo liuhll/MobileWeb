@@ -20,8 +20,7 @@ namespace Jueci.MobileWeb.Lottery.Event
         private Timer _timer;
 
         public UpdateLotteryData(LotteryEngine lotteryEngine)
-        {
-            OnEventHandler();
+        {           
             _lotteryEngine = lotteryEngine;
             _timer = new Timer(Time_Interval);
             _timer.AutoReset = false;
@@ -50,6 +49,11 @@ namespace Jueci.MobileWeb.Lottery.Event
             {
                 _timer.Start();
             }
+        }
+
+        internal void CallUpdateLotterEventHandler()
+        {
+            OnEventHandler();
         }
 
         protected void OnEventHandler()
