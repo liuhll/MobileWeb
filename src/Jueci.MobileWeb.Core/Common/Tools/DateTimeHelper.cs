@@ -19,11 +19,11 @@ namespace Jueci.MobileWeb.Common.Tools
             return (long)span.TotalSeconds;
         }
 
-     
+
         /// <summary>
         /// unix时间戳转换成日期
         /// </summary>
-        /// <param name="unixTimeStamp">时间戳（秒）</param>
+        /// <param name="timestamp">时间戳（秒）</param>
         /// <returns></returns>
         public static DateTime UnixTimestampToDateTime(long timestamp)
         {

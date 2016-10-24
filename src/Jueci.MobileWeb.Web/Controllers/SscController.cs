@@ -25,13 +25,17 @@ namespace Jueci.MobileWeb.Web.Controllers
         }
 
         // GET: Ssc
-        public ActionResult Index(string id)
+        public ActionResult Planshare(string id)
         {
             //201600927001
             var userPlanInfo = _sscPlanAppService.GetUserPlanInfos(id, CPType.cqssc);
             if (userPlanInfo.Code != ResultCode.Success)
             {
                 return new HttpNotFoundResult(userPlanInfo.Msg);
+            }
+            if (userPlanInfo.)
+            {
+                
             }
             ViewBag.OfficialWebsite = ConfigHelper.GetValuesByKey("OfficialWebsite");
             ViewBag.PlanId = id;
