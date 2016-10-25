@@ -28,18 +28,19 @@ namespace Jueci.MobileWeb.Web.Controllers
         public ActionResult Planshare(string id)
         {
             //201600927001
-            var userPlanInfo = _sscPlanAppService.GetUserPlanInfos(id, CPType.cqssc);
-            if (userPlanInfo.Code != ResultCode.Success)
-            {
-                return new HttpNotFoundResult(userPlanInfo.Msg);
-            }
-            //if (userPlanInfo.)
-            //{
-                
-            //}
+            var userPlanInfoResult = _sscPlanAppService.GetUserPlanInfos(id, CPType.cqssc,true);
+
             ViewBag.OfficialWebsite = ConfigHelper.GetValuesByKey("OfficialWebsite");
             ViewBag.PlanId = id;
-            return View(userPlanInfo.Data);
+            if (userPlanInfoResult.Code == ResultCode.NotAllowed)
+            {
+                return View("PlanAccessCode");
+            }
+            if (userPlanInfoResult.Code != ResultCode.Success)
+            {
+                return new HttpNotFoundResult(userPlanInfoResult.Msg);
+            }
+            return View(userPlanInfoResult.Data);
         }
 
         public ActionResult PlanDetails(string id,int tabIndex = 1)

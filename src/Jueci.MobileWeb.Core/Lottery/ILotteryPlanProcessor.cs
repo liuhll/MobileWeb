@@ -12,7 +12,9 @@ namespace Jueci.MobileWeb.Lottery
     public interface ILotteryPlanProcessor : ITransientDependency
     {
 
-        ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,CPType cpType);
+        //ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,string vcode,CPType cpType);
+
+        ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode);
 
         ResultMessage<NewLottery> GetNewLottery(CPType cpType);
 

@@ -16,6 +16,11 @@
         Fail = 400,
 
         /// <summary>
+        /// 未被允许的请求
+        /// </summary>
+        NotAllowed = 401,
+
+        /// <summary>
         /// 服务器内部错误
         /// </summary>
         ServiceError = 500,

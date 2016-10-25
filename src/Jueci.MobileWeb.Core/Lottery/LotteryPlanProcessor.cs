@@ -27,7 +27,7 @@ namespace Jueci.MobileWeb.Lottery
 
         public LotteryPlanProcessor(
             ILotteryServiceManager lotteryServiceManager,
-            ILotteryPlanManager lotteryPlanManager, 
+            ILotteryPlanManager lotteryPlanManager,
             IRepository<LotteryPlanLib, string> lotteryPlanLibRepository)
         {
             _lotteryServiceManager = lotteryServiceManager;
@@ -36,7 +36,21 @@ namespace Jueci.MobileWeb.Lottery
         }
 
 
-        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType)
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode)
+        {
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var lotteryPlanLib = _lotteryPlanManager.GetComputionData(id, lotteryEngine).LotteryPlanLib;
+            if (lotteryPlanLib.IsNeedAccessRight && isNeedValidVcode)
+            {
+                return new ResultMessage<IList<UserPlanInfo>>(ResultCode.NotAllowed, MessageTips.NoAccessRight);
+            }
+
+            return GetUserPlanInfoList(id, cpType);
+
+        }
+
+
+        private ResultMessage<IList<UserPlanInfo>> GetUserPlanInfoList(string id, CPType cpType)
         {
             var planComptionInfoList = UpdateComptionInfo(id, cpType);
 
@@ -65,25 +79,24 @@ namespace Jueci.MobileWeb.Lottery
         }
 
 
-
         public ResultMessage<NewLottery> GetNewLottery(CPType cpType)
         {
-        
+
             var sscLotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
             var latestCPDataInfo = sscLotteryEngine.GetLatestCPDataInfo();
             if (latestCPDataInfo.Data.Data == null)
             {
-                return new ResultMessage<NewLottery>(ResultCode.Fail,MessageTips.WaitingServiceStart);
+                return new ResultMessage<NewLottery>(ResultCode.Fail, MessageTips.WaitingServiceStart);
             }
             var nowTime = DateTime.Now;
             var newLottery = new NewLottery()
             {
                 CurrentPeriod = latestCPDataInfo.Data.ID,
-                LotteryResult = latestCPDataInfo.Data.Data.Split(',').Select(i=>Convert.ToInt32(i)).ToList(),
+                LotteryResult = latestCPDataInfo.Data.Data.Split(',').Select(i => Convert.ToInt32(i)).ToList(),
                 NextPeriod = latestCPDataInfo.NextCPDataID,
                 NextPeriodTimePoint = latestCPDataInfo.NextCPDataOpenTime,
 
-                NextPeriodTime = (int) (latestCPDataInfo.NextCPDataOpenTime > nowTime ? (latestCPDataInfo.NextCPDataOpenTime - nowTime).TotalSeconds : 0),
+                NextPeriodTime = (int)(latestCPDataInfo.NextCPDataOpenTime > nowTime ? (latestCPDataInfo.NextCPDataOpenTime - nowTime).TotalSeconds : 0),
             };
             return new ResultMessage<NewLottery>(newLottery);
 
@@ -113,16 +126,16 @@ namespace Jueci.MobileWeb.Lottery
                     PlanDetails = pc.DMSMResultList.Select(dmsmResultItem => new PlanDetailList()
                     {
                         ////064-066期|1 2 5 7|2|065|22049|对,
-                        CycleName = dmsmResultItem.GetPlanRegionString(),                 
+                        CycleName = dmsmResultItem.GetPlanRegionString(),
                         LotteryResult = dmsmResultItem.ActualEndData,//
-                        DsType = pc.Plan.DSType ,
+                        DsType = pc.Plan.DSType,
                         EndIndex = dmsmResultItem.ActualEndTermIndex + 1,
                         CurrentCycleName = dmsmResultItem.GetPlanActualEndTerm(),
                         GuessValue = dmsmResultItem.GetDMSMForecastString(),
                         RightOrWrong = dmsmResultItem.GetPlanResultString(),
 
                     }).ToList(),
- 
+
                 };
             }).ToList();
             return new ResultMessage<IList<UserPlanDetail>>(userPlanDetail);
@@ -138,7 +151,7 @@ namespace Jueci.MobileWeb.Lottery
             var planDetail = planComptionInfoList.FirstOrDefault(pc => pc.Plan.Name.Equals(planName));
             if (planDetail == null)
             {
-                return new ResultMessage<UserPlanDetail>(ResultCode.Fail, string.Format(MessageTips.NoThisPlanDetail,planName));
+                return new ResultMessage<UserPlanDetail>(ResultCode.Fail, string.Format(MessageTips.NoThisPlanDetail, planName));
             }
 
             var pret = planDetail.GetResultProperties();
@@ -173,7 +186,7 @@ namespace Jueci.MobileWeb.Lottery
 
         public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, PlanCacheArgs planCacheArgs)
         {
-            LogHelper.Logger.Info(string.Format(MessageTips.StartCallApiLog, "UpdateUserPlanCache",JsonConvert.SerializeObject(planCacheArgs)));
+            LogHelper.Logger.Info(string.Format(MessageTips.StartCallApiLog, "UpdateUserPlanCache", JsonConvert.SerializeObject(planCacheArgs)));
             //检查请求的合法性
             var planlibPolicy = new UpdateUserPlanLibPolicy(planCacheArgs);
 
@@ -196,14 +209,14 @@ namespace Jueci.MobileWeb.Lottery
 
             if (lotteryPlanLib == null)
             {
-               return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NoExitPlanLib, false);
+                return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NoExitPlanLib, false);
             }
 
             var planComputionInfos = lotteryEngine.ConvertPCListFromXml(XElement.Parse(lotteryPlanLib.PlanComputionInfo));
             try
             {
-                var data = _lotteryPlanManager.UpdateUserLotteryPlan(lotteryPlanLib.Id, planComputionInfos);
-                LogHelper.Logger.Info(string.Format(MessageTips.EndCallApiLog, "UpdateUserPlanCache",data));
+                var data = _lotteryPlanManager.UpdateUserLotteryPlan(lotteryPlanLib.Id, planComputionInfos, lotteryPlanLib);
+                LogHelper.Logger.Info(string.Format(MessageTips.EndCallApiLog, "UpdateUserPlanCache", data));
                 return new ResultMessage<bool>(data);
             }
             catch (Exception e)
@@ -215,7 +228,7 @@ namespace Jueci.MobileWeb.Lottery
 
         public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)
         {
-            var planComputionInfos = UpdateComptionInfo(id,cpType);
+            var planComputionInfos = UpdateComptionInfo(id, cpType);
             return new ResultMessage<List<PlanComputionInfo>>(planComputionInfos);
         }
 
@@ -228,9 +241,11 @@ namespace Jueci.MobileWeb.Lottery
 
             if (isNeedUpdateCache)
             {
-                _lotteryPlanManager.UpdateUserLotteryPlan(id, planComptionInfoList);
+                var lotteryPlanLib = _lotteryPlanLibRepository.Single(p => p.Id == id);
+                _lotteryPlanManager.UpdateUserLotteryPlan(id, planComptionInfoList, lotteryPlanLib);
             }
             lotteryEngine.ComputeLotteryPlans(planComptionInfoList);
+
             return planComptionInfoList;
         }
 

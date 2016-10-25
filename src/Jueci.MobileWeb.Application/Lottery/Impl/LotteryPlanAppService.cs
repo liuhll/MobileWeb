@@ -17,9 +17,10 @@ namespace Jueci.MobileWeb.Lottery.Impl
             _lotteryPlanProcessor = lotteryPlanProcessor;
         }
 
-        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,CPType cpType)
+
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode = false)
         {
-            return _lotteryPlanProcessor.GetUserPlanInfos(id, cpType);
+            return _lotteryPlanProcessor.GetUserPlanInfos(id, cpType,isNeedValidVcode);
         }
 
         public ResultMessage<NewLottery> GetNewLottery(CPType cpType)

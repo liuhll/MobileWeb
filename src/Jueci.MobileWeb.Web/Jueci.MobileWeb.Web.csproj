@@ -535,6 +535,7 @@
     <Content Include="Scripts\sweetalert\sweet-alert.scss" />
     <Content Include="Views\Shared\_HeadCloth.cshtml" />
     <Content Include="Views\Shared\_HeadCommon.cshtml" />
+    <Content Include="Views\CqSsc\PlanAccessCode.cshtml" />
     <None Include="Views\CqSsc\Planshare.cshtml" />
     <Content Include="Views\CqSsc\PlanDetails.cshtml" />
     <Content Include="Views\CqSsc\_Clock.cshtml" />

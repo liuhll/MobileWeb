@@ -24,18 +24,18 @@ namespace Jueci.MobileWeb.Lottery.Service.LotteryPlanManager
         }
 
 
-        public bool UpdateUserLotteryPlan(string id,List<PlanComputionInfo> planInfos)
+        public bool UpdateUserLotteryPlan(string id,List<PlanComputionInfo> planInfos,LotteryPlanLib lotteryPlanLib)
         {
             lock (_planComputionCache)
             {
                 if (!_planComputionCache.ContainsKey(id))
                 {
-                    _planComputionCache.Add(id, new PlanComputionData(planInfos));
+                    _planComputionCache.Add(id, new PlanComputionData(planInfos, lotteryPlanLib));
                     _planComputionCache[id].OperateTime = DateTime.Now;
                 }
                 else
                 {
-                    _planComputionCache[id] = new PlanComputionData(planInfos);
+                    _planComputionCache[id] = new PlanComputionData(planInfos, lotteryPlanLib);
                     _planComputionCache[id].OperateTime = DateTime.Now;
                 }
                 return true;
@@ -65,6 +65,27 @@ namespace Jueci.MobileWeb.Lottery.Service.LotteryPlanManager
             }
         }
 
-      
+        public PlanComputionData GetComputionData(string id, LotteryEngine sscLotteryEngine)
+        {
+            lock (_planComputionCache)
+            {
+                if (_planComputionCache.ContainsKey(id))
+                {
+                    _planComputionCache[id].OperateTime = DateTime.Now;
+                    return _planComputionCache[id];
+                }
+                var planLibInfo = _lotteryPlanLibRepository.Single(p => p.Id == id);
+                if (planLibInfo == null)
+                {
+                    string msg = string.Format("不存在Id为{0}计划，请检查您输入的url是否正确", id);
+                    LogHelper.Logger.Error(msg);
+                    throw new Exception(msg);
+                }
+                var planComputtionList = sscLotteryEngine.ConvertPCListFromXml(XElement.Parse(planLibInfo.PlanComputionInfo));
+                _planComputionCache.Add(id, new PlanComputionData(planComputtionList, planLibInfo));
+                _planComputionCache[id].OperateTime = DateTime.Now;
+                return _planComputionCache[id];
+            }
+        }
     }
 }

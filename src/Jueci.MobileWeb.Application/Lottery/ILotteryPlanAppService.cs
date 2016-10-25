@@ -10,7 +10,9 @@ namespace Jueci.MobileWeb.Lottery
 {
     public interface ILotteryPlanAppService : IApplicationService
     {
-        ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType);
+        //ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,string vcode, CPType cpType);
+
+        ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode = false);
 
         ResultMessage<NewLottery> GetNewLottery(CPType cpType);
 

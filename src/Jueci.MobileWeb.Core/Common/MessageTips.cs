@@ -26,5 +26,9 @@ namespace Jueci.MobileWeb.Common
         public const string StartCallApiLog = "开始调用{0}Api接口，参数值为{1}";
 
         public const string EndCallApiLog = "接口{0}调用成功，返回值为{1}";
+
+        public const string NoAccessRight = "请输入访问码后再尝试访问";
+
+        public const string AccessCodeError = "您输入的访问码错误,请重新输入";
     }
 }
