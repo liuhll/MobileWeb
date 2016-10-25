@@ -10,7 +10,7 @@ namespace Jueci.MobileWeb.Lottery
 {
     public interface ILotteryPlanAppService : IApplicationService
     {
-        //ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,string vcode, CPType cpType);
+        ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,string vcode, CPType cpType);
 
         ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode = false);
 
@@ -23,5 +23,6 @@ namespace Jueci.MobileWeb.Lottery
         ResultMessage<bool> UpdateUserPlanCache(CPType cpType, PlanCacheArgs planCacheArgs);
 
         //ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType);
+        ResultMessage<bool> IsNeedAccessRight(string id,CPType cpType);
     }
 }

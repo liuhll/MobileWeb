@@ -36,6 +36,23 @@ namespace Jueci.MobileWeb.Lottery
         }
 
 
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, string vcode, CPType cpType)
+        {
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var lotteryPlanLib = _lotteryPlanManager.GetComputionData(id, lotteryEngine).LotteryPlanLib;
+
+            if (lotteryPlanLib.IsNeedAccessRight && string.IsNullOrEmpty(vcode))
+            {
+                return new ResultMessage<IList<UserPlanInfo>>(ResultCode.NotAllowed, MessageTips.NoAccessRight);
+            }
+            if (lotteryPlanLib.IsNeedAccessRight && !lotteryPlanLib.VCode.Equals(vcode,StringComparison.OrdinalIgnoreCase))
+            {
+                return new ResultMessage<IList<UserPlanInfo>>(ResultCode.NotAllowed, MessageTips.AccessCodeError);
+            }
+
+            return GetUserPlanInfoList(id, cpType);
+        }
+
         public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode)
         {
             var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
@@ -224,6 +241,13 @@ namespace Jueci.MobileWeb.Lottery
                 LogHelper.Logger.Error(e.Message);
                 return new ResultMessage<bool>(ResultCode.ServiceError, e.Message, false);
             }
+        }
+
+        public ResultMessage<bool> IsNeedAccessRight(string id, CPType cpType)
+        {
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var lotteryPlanLib = _lotteryPlanManager.GetComputionData(id, lotteryEngine).LotteryPlanLib;
+            return new ResultMessage<bool>(lotteryPlanLib.IsNeedAccessRight,MessageTips.NoAccessRight);
         }
 
         public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)

@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
+using Abp.Web.Models;
+using Abp.Web.Security.AntiForgery;
 using Jueci.MobileWeb.Lottery;
 using Jueci.MobileWeb.Ssc;
 using Camew.Lottery;
+using Jeuci.SalesSystem.Entities.Common;
 using Jueci.MobileWeb.Common.Enums;
 using Jueci.MobileWeb.Common.Tools;
+using Jueci.MobileWeb.Lottery.Models.Transfer;
 using Jueci.MobileWeb.Web.Models.Common;
+using Jueci.MobileWeb.Web.Models.PlanShare;
 using Jueci.MobileWeb.Web.Models.UserPlanDetail;
 
 namespace Jueci.MobileWeb.Web.Controllers
@@ -27,13 +33,18 @@ namespace Jueci.MobileWeb.Web.Controllers
         // GET: Ssc
         public ActionResult Planshare(string id)
         {
-            //201600927001
-            var userPlanInfoResult = _sscPlanAppService.GetUserPlanInfos(id, CPType.cqssc,true);
+            var vcode = GetSessionValue<string>(id);
+            ResultMessage<IList<UserPlanInfo>> userPlanInfoResult;
+            userPlanInfoResult = !string.IsNullOrEmpty(vcode) ?
+                _sscPlanAppService.GetUserPlanInfos(id, vcode, CPType.cqssc) :
+                _sscPlanAppService.GetUserPlanInfos(id, CPType.cqssc, true);
 
             ViewBag.OfficialWebsite = ConfigHelper.GetValuesByKey("OfficialWebsite");
             ViewBag.PlanId = id;
             if (userPlanInfoResult.Code == ResultCode.NotAllowed)
             {
+                ViewBag.ReturnUrl = Request.RawUrl;
+                ViewBag.Message = userPlanInfoResult.Msg;
                 return View("PlanAccessCode");
             }
             if (userPlanInfoResult.Code != ResultCode.Success)
@@ -43,8 +54,37 @@ namespace Jueci.MobileWeb.Web.Controllers
             return View(userPlanInfoResult.Data);
         }
 
-        public ActionResult PlanDetails(string id,int tabIndex = 1)
+        [System.Web.Mvc.HttpPost]
+        [DisableAbpAntiForgeryTokenValidation]
+        public JsonResult Planshare([FromBody]AccessCodeViewModel model)
         {
+            var userPlanInfoResult = _sscPlanAppService.GetUserPlanInfos(model.Id, model.Vcode, CPType.cqssc);
+
+            if (userPlanInfoResult.Code != ResultCode.Success)
+            {
+                return Json(new AccessRightResult(false, userPlanInfoResult.Msg, model.ReturnUrl));
+            }
+            AddSessionValue(model.Id, model.Vcode);
+
+            return Json(new AccessRightResult(true, userPlanInfoResult.Msg, model.ReturnUrl));
+
+        }
+
+
+        public ActionResult PlanDetails(string id, int tabIndex = 1)
+        {
+            //有session存在的情况下证明已经通过验证，不存在Session的情况下需要确认是否需要访问码，如果需要访问码，则跳转到访问码输入页面
+            string vcode = GetSessionValue<string>(id);
+            if (string.IsNullOrEmpty(vcode))
+            {
+                var result = _sscPlanAppService.IsNeedAccessRight(id, CPType.cqssc);
+                if (result.Data)
+                {
+                    ViewBag.Message = result.Msg;
+                    ViewBag.ReturnUrl = Request.RawUrl;
+                    return View("PlanAccessCode");
+                }
+            }
             var userPlanDetail = _sscPlanAppService.GetUserPlanDetail(id, CPType.cqssc);
             if (userPlanDetail.Code != ResultCode.Success)
             {
@@ -68,7 +108,7 @@ namespace Jueci.MobileWeb.Web.Controllers
                     return PartialView("_Clock", newLotteryResult.Data);
             }
 
-           
+
         }
 
         public PartialViewResult UserPlanInfoList(string id)
@@ -82,14 +122,14 @@ namespace Jueci.MobileWeb.Web.Controllers
             return PartialView("_UserPlanInfoList", userPlanInfo.Data);
         }
 
-        public PartialViewResult UserPlanDetailClock(string id,string planName, int tabIndex)
+        public PartialViewResult UserPlanDetailClock(string id, string planName, int tabIndex)
         {
             var userPlanDetail = _sscPlanAppService.GetUserPlanDetailPosition(id, planName, CPType.cqssc);
             if (userPlanDetail.Code != ResultCode.Success)
             {
-                 throw new Exception("get  UserPlanDetailClock error!");
+                throw new Exception("get  UserPlanDetailClock error!");
             }
-            return PartialView("_UserPlanDetailClock", new UserPlanDetailClock(tabIndex,userPlanDetail.Data));
+            return PartialView("_UserPlanDetailClock", new UserPlanDetailClock(tabIndex, userPlanDetail.Data));
         }
 
         public PartialViewResult UserPlanDetailInfo(string id, string planName)
@@ -109,7 +149,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             {
                 throw new Exception("get  UserPlanDetailClock error!");
             }
-            return PartialView("_UserPlanDetailList",userPlanDetail.Data);
+            return PartialView("_UserPlanDetailList", userPlanDetail.Data);
         }
     }
 }

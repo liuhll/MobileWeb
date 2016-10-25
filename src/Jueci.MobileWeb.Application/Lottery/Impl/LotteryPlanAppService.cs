@@ -18,6 +18,11 @@ namespace Jueci.MobileWeb.Lottery.Impl
         }
 
 
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, string vcode, CPType cpType)
+        {
+            return _lotteryPlanProcessor.GetUserPlanInfos(id, vcode, cpType);
+        }
+
         public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode = false)
         {
             return _lotteryPlanProcessor.GetUserPlanInfos(id, cpType,isNeedValidVcode);
@@ -41,6 +46,11 @@ namespace Jueci.MobileWeb.Lottery.Impl
         public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, PlanCacheArgs planCacheArgs)
         {
             return _lotteryPlanProcessor.UpdateUserPlanCache(cpType, planCacheArgs);
+        }
+
+        public ResultMessage<bool> IsNeedAccessRight(string id, CPType cpType)
+        {
+            return _lotteryPlanProcessor.IsNeedAccessRight(id, cpType);
         }
 
         //public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)

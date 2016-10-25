@@ -340,6 +340,19 @@
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile-1.4.5.min.js" />
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile.structure-1.4.5.css" />
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile.structure-1.4.5.min.css" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\jquery.serializejson.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\jquery.serializejson.min.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\jasmine-2.0.0\boot.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\jasmine-2.0.0\console.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\jasmine-2.0.0\jasmine-html.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\jasmine-2.0.0\jasmine.css" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\jasmine-2.0.0\jasmine.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\jasmine-2.0.0\jasmine_favicon.png" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\jquery-2.1.3.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\lib\zepto-1.1.6.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\spec.js" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\spec_runner_jquery.html" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\spec\spec_runner_zepto.html" />
     <Content Include="Abp\Lib\jquery\jquery-2.1.4.js" />
     <Content Include="Abp\Lib\jquery\jquery-2.1.4.min.js" />
     <Content Include="Abp\Lib\shCircleLoader\jquery.shCircleLoader-min.js" />
@@ -456,6 +469,10 @@
     <Content Include="bower.json" />
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile-1.4.5.min.map" />
     <Content Include="Abp\Lib\jquery\jquery-2.1.4.min.map" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\.bower.json" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\bower.json" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\package.json" />
+    <Content Include="Abp\Lib\jquery.serializeJSON\README.md" />
     <None Include="Properties\PublishProfiles\webapp.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -519,6 +536,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Layout\TopMenuViewModel.cs" />
+    <Compile Include="Models\PlanShare\AccessRightResult.cs" />
+    <Compile Include="Models\PlanShare\AccessCodeViewModel.cs" />
     <Compile Include="Models\UserPlanDetail\UserPlanDetailClock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\MobileWebWebViewPageBase.cs" />
