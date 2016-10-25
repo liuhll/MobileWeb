@@ -130,7 +130,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Controllers\SscController.cs" />
+    <Compile Include="Api\Controllers\LotteryController.cs" />
     <Compile Include="MobileWebWebApiModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
