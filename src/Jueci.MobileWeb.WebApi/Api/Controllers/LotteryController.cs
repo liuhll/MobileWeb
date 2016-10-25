@@ -17,15 +17,15 @@ namespace Jueci.MobileWeb.Api.Controllers
     /// <remarks>
     /// 重庆时时彩计划分享计划接口
     /// </remarks>
-    [RoutePrefix("api/ssc")]
-    public class SscController :AbpApiController
+    [RoutePrefix("api/lottery")]
+    public class LotteryController :AbpApiController
     {
         private readonly ILotteryPlanAppService _lotteryPlanAppService;
 
         /// <summary>
         /// 重庆时时彩计划分享计划接口
         /// </summary>
-        public SscController(ILotteryPlanAppService lotteryPlanAppService)
+        public LotteryController(ILotteryPlanAppService lotteryPlanAppService)
         {
             _lotteryPlanAppService = lotteryPlanAppService;
         }
@@ -49,8 +49,8 @@ namespace Jueci.MobileWeb.Api.Controllers
         /// <param name="id"></param>
         /// <returns></returns> 
         /// <remarks>获取下一期开奖信息</remarks>                 
-        [HttpGet]   
-//        [Route("api/ssc/clock")]
+        [HttpGet]
+        //        [Route("api/lottery/clock")]
         public ResultMessage<NewLottery> Clock()
         {
             return _lotteryPlanAppService.GetNewLottery(CPType.cqssc);
