@@ -21,6 +21,7 @@
   ],
   "dependencies": {
     "jquery.mobile.bootstrap": "git@github.com:commadelimited/jQuery-Mobile-Bootstrap-Theme.git",
-    "shCircleLoader": "git@github.com:sunhater/shCircleLoader.git" 
+    "shCircleLoader": "git@github.com:sunhater/shCircleLoader.git",
+    "jquery.serializeJSON": "git@github.com:marioizquierdo/jquery.serializeJSON.git"
   }
 }

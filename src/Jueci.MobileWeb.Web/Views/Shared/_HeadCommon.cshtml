@@ -1,8 +1,18 @@
-﻿<div data-role="header" data-theme="c" data-position="inline">
-    <a id="back" href="#" @*data-icon="back"*@ data-theme="c">
-        <img src="~/images/icon/back@3x.png" alt="back" width="10" height="10"/>
-        返回
-    </a>
+﻿@{
+    bool isNeedBackBtn = ViewBag.isNeedBackBtn ?? true;
+}
+
+
+
+<div data-role="header" data-theme="c" data-position="inline">
+   @if (isNeedBackBtn)
+   {
+        <a id="back" href="#" @*data-icon="back"*@ data-theme="c">
+            <img src="~/images/icon/back@3x.png" alt="back" width="10" height="10" />
+            返回
+        </a>
+   }
+     
     <h1>@ViewBag.HeadTitle</h1>
 </div>
 <script>

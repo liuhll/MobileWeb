@@ -35,7 +35,7 @@ function getNewLottery() {
     var currentPeriod = parseInt($('#CurrentPeriod').val());
     var _interval = 1000;
     $.ajax({
-        "url": abp.appPath + "api/Ssc",
+        "url": abp.appPath + "api/Lottery",
         //"data": { 'id': $('#PlanId').val() },
         "dataType": "json",
         "type": 'get',

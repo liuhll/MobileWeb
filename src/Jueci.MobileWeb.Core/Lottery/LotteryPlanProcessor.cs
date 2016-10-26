@@ -36,6 +36,14 @@ namespace Jueci.MobileWeb.Lottery
         }
 
 
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, string vcode, CPType cpType, bool isRepeatedValid)
+        {
+            ResultMessage<IList<UserPlanInfo>> result = null;
+
+            return !ValidAccessCodeLegal(id, vcode, cpType, isRepeatedValid, out result) ?
+                result : GetUserPlanInfoList(id, cpType);
+        }
+
         public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode)
         {
             var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
@@ -48,36 +56,6 @@ namespace Jueci.MobileWeb.Lottery
             return GetUserPlanInfoList(id, cpType);
 
         }
-
-
-        private ResultMessage<IList<UserPlanInfo>> GetUserPlanInfoList(string id, CPType cpType)
-        {
-            var planComptionInfoList = UpdateComptionInfo(id, cpType);
-
-            if (!IsHaveDMSMResult(planComptionInfoList))
-            {
-                return new ResultMessage<IList<UserPlanInfo>>(ResultCode.Fail, MessageTips.NoDmsmResult);
-            }
-            var userPlanInfo = planComptionInfoList.Select(p =>
-            {
-                var dsRet = p.DMSMResultList.Last();
-                return new UserPlanInfo()
-                {
-                    Name = p.Plan.Name,
-                    DsType = p.Plan.DSType,
-                    PlanSection = dsRet.GetPlanRegionString(),
-                    GuessValue = dsRet.Data.ToString(),
-                    GuessResultList = p.DMSMResultList.Take(p.DMSMResultList.Count - 1)
-                                      .Select(x => x.Result > 0 ? RightOrWrongEnum.Right : RightOrWrongEnum.Wrong)
-                                      .ToList(),
-                    EndIndex = p.PlanParameter.PlanCycle > 1 ? dsRet.ActualEndTermIndex + 1 : (int?)null,
-                    GuessPercent = p.DMSMResultList.Count(x => x.Result > 0) / (float)(p.DMSMResultList.Count - 1)
-
-                };
-            }).ToList();
-            return new ResultMessage<IList<UserPlanInfo>>(userPlanInfo);
-        }
-
 
         public ResultMessage<NewLottery> GetNewLottery(CPType cpType)
         {
@@ -109,10 +87,8 @@ namespace Jueci.MobileWeb.Lottery
             {
                 return new ResultMessage<IList<UserPlanDetail>>(ResultCode.Fail, MessageTips.NoDmsmResult);
             }
-
             var userPlanDetail = planComptionInfoList.Select(pc =>
             {
-
                 var pret = pc.GetResultProperties();
                 return new UserPlanDetail()
                 {
@@ -127,20 +103,25 @@ namespace Jueci.MobileWeb.Lottery
                     {
                         ////064-066期|1 2 5 7|2|065|22049|对,
                         CycleName = dmsmResultItem.GetPlanRegionString(),
-                        LotteryResult = dmsmResultItem.ActualEndData,//
+                        LotteryResult = dmsmResultItem.ActualEndData, //
                         DsType = pc.Plan.DSType,
                         EndIndex = dmsmResultItem.ActualEndTermIndex + 1,
                         CurrentCycleName = dmsmResultItem.GetPlanActualEndTerm(),
                         GuessValue = dmsmResultItem.GetDMSMForecastString(),
                         RightOrWrong = dmsmResultItem.GetPlanResultString(),
-
                     }).ToList(),
-
                 };
             }).ToList();
             return new ResultMessage<IList<UserPlanDetail>>(userPlanDetail);
         }
-
+       
+        public ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, string vcode, CPType cpType,bool isRepeatedValid)
+        {
+            ResultMessage<IList<UserPlanDetail>> result = null;
+            return !ValidAccessCodeLegal(id, vcode, cpType, isRepeatedValid, out result) ?
+                   result: GetUserPlanDetail(id, cpType);
+        }
+      
         public ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType)
         {
             var planComptionInfoList = UpdateComptionInfo(id, cpType);
@@ -226,13 +207,21 @@ namespace Jueci.MobileWeb.Lottery
             }
         }
 
-        public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)
+        public ResultMessage<bool> IsNeedAccessRight(string id, CPType cpType)
         {
-            var planComputionInfos = UpdateComptionInfo(id, cpType);
-            return new ResultMessage<List<PlanComputionInfo>>(planComputionInfos);
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var lotteryPlanLib = _lotteryPlanManager.GetComputionData(id, lotteryEngine).LotteryPlanLib;
+            return new ResultMessage<bool>(lotteryPlanLib.IsNeedAccessRight,MessageTips.NoAccessRight);
         }
 
+        //public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)
+        //{
+        //    var planComputionInfos = UpdateComptionInfo(id, cpType);
+        //    return new ResultMessage<List<PlanComputionInfo>>(planComputionInfos);
+        //}
 
+
+        #region 私有方法
         private List<PlanComputionInfo> UpdateComptionInfo(string id, CPType cpType)
         {
             var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
@@ -249,10 +238,27 @@ namespace Jueci.MobileWeb.Lottery
             return planComptionInfoList;
         }
 
-        //private IList<UserPlanInfo> GetUserPlanInfos(List<PlanComputionInfo> planComptionInfoList)
-        //{
+        private bool ValidAccessCodeLegal<T>(string id, string vcode, CPType cpType, bool isRepeatedValid, out ResultMessage<T> result)
+        {
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var lotteryPlanLib = _lotteryPlanManager.GetComputionData(id, lotteryEngine).LotteryPlanLib;
 
-        //}
+            if (lotteryPlanLib.IsNeedAccessRight && string.IsNullOrEmpty(vcode))
+            {
+                result = new ResultMessage<T>(ResultCode.NotAllowed, MessageTips.NoAccessRight);
+                return false;
+            }
+            if (lotteryPlanLib.IsNeedAccessRight && !lotteryPlanLib.VCode.Equals(vcode, StringComparison.OrdinalIgnoreCase))
+            {
+                result = isRepeatedValid ?
+                    new ResultMessage<T>(ResultCode.NotAllowed, MessageTips.AccessCodeError) :
+                    new ResultMessage<T>(ResultCode.NotAllowed, MessageTips.AccessCodeChange);
+
+                return false;
+            }
+            result = new ResultMessage<T>(ResultCode.Success, "ValidAccessCode Success");
+            return true;
+        }
 
         private bool IsHaveDMSMResult(List<PlanComputionInfo> planComptionInfoList)
         {
@@ -262,5 +268,35 @@ namespace Jueci.MobileWeb.Lottery
             }
             return true;
         }
+
+        private ResultMessage<IList<UserPlanInfo>> GetUserPlanInfoList(string id, CPType cpType)
+        {
+            var planComptionInfoList = UpdateComptionInfo(id, cpType);
+
+            if (!IsHaveDMSMResult(planComptionInfoList))
+            {
+                return new ResultMessage<IList<UserPlanInfo>>(ResultCode.Fail, MessageTips.NoDmsmResult);
+            }
+            var userPlanInfo = planComptionInfoList.Select(p =>
+            {
+                var dsRet = p.DMSMResultList.Last();
+                return new UserPlanInfo()
+                {
+                    Name = p.Plan.Name,
+                    DsType = p.Plan.DSType,
+                    PlanSection = dsRet.GetPlanRegionString(),
+                    GuessValue = dsRet.Data.ToString(),
+                    GuessResultList = p.DMSMResultList.Take(p.DMSMResultList.Count - 1)
+                                      .Select(x => x.Result > 0 ? RightOrWrongEnum.Right : RightOrWrongEnum.Wrong)
+                                      .ToList(),
+                    EndIndex = p.PlanParameter.PlanCycle > 1 ? dsRet.ActualEndTermIndex + 1 : (int?)null,
+                    GuessPercent = p.DMSMResultList.Count(x => x.Result > 0) / (float)(p.DMSMResultList.Count - 1)
+
+                };
+            }).ToList();
+            return new ResultMessage<IList<UserPlanInfo>>(userPlanInfo);
+        } 
+        #endregion
+
     }
 }

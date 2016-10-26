@@ -12,7 +12,7 @@ namespace Jueci.MobileWeb.Lottery
     public interface ILotteryPlanProcessor : ITransientDependency
     {
 
-        //ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,string vcode,CPType cpType);
+        ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id,string vcode,CPType cpType, bool isRepeatedValid);
 
         ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode);
 
@@ -20,10 +20,13 @@ namespace Jueci.MobileWeb.Lottery
 
         ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, CPType cpType);
 
+        ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, string vcode, CPType cpType, bool isRepeatedValid);
+         
         ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType);
 
         ResultMessage<bool> UpdateUserPlanCache(CPType cpType, PlanCacheArgs planCacheArgs);
 
        // ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType);
+        ResultMessage<bool> IsNeedAccessRight(string id, CPType cpType);
     }
 }

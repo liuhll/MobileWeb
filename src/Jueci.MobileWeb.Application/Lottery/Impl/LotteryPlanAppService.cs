@@ -18,6 +18,11 @@ namespace Jueci.MobileWeb.Lottery.Impl
         }
 
 
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, string vcode, CPType cpType, bool isRepeatedValid = false)
+        {
+            return _lotteryPlanProcessor.GetUserPlanInfos(id, vcode, cpType, isRepeatedValid);
+        }
+
         public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode = false)
         {
             return _lotteryPlanProcessor.GetUserPlanInfos(id, cpType,isNeedValidVcode);
@@ -33,6 +38,11 @@ namespace Jueci.MobileWeb.Lottery.Impl
             return _lotteryPlanProcessor.GetUserPlanDetail(id, cpType);
         }
 
+        public ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, string vcode, CPType cpType, bool isRepeatedValid)
+        {
+            return _lotteryPlanProcessor.GetUserPlanDetail(id, vcode, cpType, isRepeatedValid);
+        }
+
         public ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType)
         {
             return _lotteryPlanProcessor.GetUserPlanDetailPosition( id, planName, cpType);
@@ -41,6 +51,11 @@ namespace Jueci.MobileWeb.Lottery.Impl
         public ResultMessage<bool> UpdateUserPlanCache(CPType cpType, PlanCacheArgs planCacheArgs)
         {
             return _lotteryPlanProcessor.UpdateUserPlanCache(cpType, planCacheArgs);
+        }
+
+        public ResultMessage<bool> IsNeedAccessRight(string id, CPType cpType)
+        {
+            return _lotteryPlanProcessor.IsNeedAccessRight(id, cpType);
         }
 
         //public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)

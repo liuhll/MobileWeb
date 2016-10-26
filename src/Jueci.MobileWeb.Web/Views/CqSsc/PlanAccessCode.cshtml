@@ -1,1 +1,53 @@
-﻿<p>Access Code View</p>
+﻿@{
+    ViewBag.Title = "计划分享访问码";
+    ViewBag.HeadTitle = "计划分享访问码";
+    ViewBag.isNeedBackBtn = false;
+    //string msg = ViewBag.Message ?? string.Empty;
+    string returnUrl = ViewBag.ReturnUrl ?? string.Empty;
+    string tips = ViewBag.Message ?? string.Empty;
+}
+
+@section Scripts{
+    <script src="~/Abp/Lib/jquery.serializeJSON/jquery.serializejson.min.js"></script>
+}
+
+<form id="form1" @*action="@Url.Action("Planshare")" method="post"*@>
+    @*@Html.AntiForgeryToken()*@
+    @Html.Hidden("Id", (string) ViewBag.PlanId)
+    @Html.Hidden("ReturnUrl",returnUrl)
+    <div data-role="fieldcontain">
+        <label for="Vcode">请输入访问码:</label>
+        <input type="text" name="Vcode" id="vcode" value=""/>
+    </div>
+    <label id="tips">@tips</label>
+    <fieldset class="ui-grid-a" style="margin: 0 auto">
+        
+        <button type="button" id="btnOK" data-theme="a">确认</button>
+    </fieldset>    
+</form>
+
+<script type="text/javascript">
+    $(function() {
+        $('#btnOK').on('click', function () {
+
+            $.ajax({
+                url: abp.appPath + "app/cqssc/planshare",
+                datatype: 'json',
+                type: 'post',
+                data: $('#form1').serializeJSON(),
+                success: function (data) {
+                    console.log(data["result"]);
+                    var arData = data["result"];
+                    if (arData["hasAccessRight"]) {
+                       
+                        location.href = arData["returnUrl"];
+                    } else {
+                        $("#tips").text(arData["messageTips"]);
+                        $("#ReturnUrl").text(arData["returnUrl"]);
+                    }
+                }
+
+            });
+        });
+    });
+</script>
