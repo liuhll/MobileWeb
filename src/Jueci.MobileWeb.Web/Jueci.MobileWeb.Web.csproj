@@ -363,6 +363,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\ssc\accesscode.css" />
     <Content Include="Content\ssc\pclayout.css" />
     <Content Include="Content\ssc\slide-tabs.css" />
     <Content Include="Content\themes\base\accordion.css" />

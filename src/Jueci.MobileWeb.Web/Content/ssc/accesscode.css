@@ -1,0 +1,36 @@
+﻿
+.form-access-code {
+    font-size: 16px;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 2px;
+    text-align: center;
+}
+
+.access-code-group {
+    padding: 0 30px;
+    max-width:300px;
+    text-align: center;
+    margin: 0 auto;
+  
+}
+
+.tips {
+    font-size: 10px;
+    color: #D63138;
+    /*padding: 12px 0 10px 20px;*/
+
+}
+
+
+
+.input-access-code {
+   
+}
+
+.btn-access-code {
+    max-width:300px;
+    height: 35px;
+    padding: 0;
+    margin: 20px auto;
+}

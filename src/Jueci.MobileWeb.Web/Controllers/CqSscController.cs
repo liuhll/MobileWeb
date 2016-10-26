@@ -44,7 +44,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             ViewBag.PlanId = id;
             if (userPlanInfoResult.Code == ResultCode.NotAllowed)
             {
-                ViewBag.ReturnUrl = Request.RawUrl;
+                ViewBag.ReturnUrl = Request.RawUrl.Substring(1);
                 ViewBag.Message = userPlanInfoResult.Msg;
                 return View("PlanAccessCode");
             }
@@ -82,7 +82,7 @@ namespace Jueci.MobileWeb.Web.Controllers
                 if (result.Data)
                 {
                     ViewBag.Message = result.Msg;
-                    ViewBag.ReturnUrl = Request.RawUrl;
+                    ViewBag.ReturnUrl = Request.RawUrl.Substring(1);
                     return View("PlanAccessCode");
                 }
             }
