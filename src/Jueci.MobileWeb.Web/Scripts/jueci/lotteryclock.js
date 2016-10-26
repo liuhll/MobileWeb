@@ -55,24 +55,27 @@ function getNewLottery() {
                 $('#NextPeriodTimePoint').val(lotteryData['nextPeriodTimePointDisplay']);
                 $('.countdown-number-content').removeClass('clock-hide');
 
-                // userPlanInfoList
-                $.ajax({
-                    "url": abp.appPath + "app/ssc/userPlanInfoList",
+                if ($('#accessPage').val()) {
+                    setTimeout("nextLotteryClock();", _interval);
+                }else {
+                     $.ajax({
+                    "url": abp.appPath + "app/cqssc/userPlanInfoList",
                     "data": { 'id': $('#PlanId').val() },
                     "dataType": "html",
                     "type": 'get',
                     "beforeSend": function () {
                         $.fn.Loader(true);
-                    },
+                },
                     "success": function (data1) {
                         $('#userPlanInfoList').html(data1);
                         setTimeout("nextLotteryClock();", _interval);
                       
-                    },
+                },
                     "complete": function () {
                         $.fn.Loader(false);
-                    }
+                }
                 });
+                }
 
 
             } else {

@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "计划分享访问码";
     ViewBag.HeadTitle = "计划分享访问码";
-    ViewBag.isNeedBackBtn = false;
-    //string msg = ViewBag.Message ?? string.Empty;
+   // ViewBag.isNeedBackBtn = false;
+    ViewBag.IsHomePage = true;
     string returnUrl = ViewBag.ReturnUrl ?? string.Empty;
     string tips = ViewBag.Message ?? string.Empty;
 }
@@ -10,6 +10,8 @@
 @section Scripts{
     <script src="~/Abp/Lib/jquery.serializeJSON/jquery.serializejson.min.js"></script>
 }
+
+<input type="hidden" id="accessPage" value="true"/>
 
 <form id="form1" @*action="@Url.Action("Planshare")" method="post"*@>
     @*@Html.AntiForgeryToken()*@

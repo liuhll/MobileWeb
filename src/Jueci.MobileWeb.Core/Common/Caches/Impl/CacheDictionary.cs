@@ -32,7 +32,7 @@ namespace Jueci.MobileWeb.Common.Caches.Impl
                 {
                     foreach (var item in this)
                     {
-                        if (DateTime.Now >= item.Value.OperateTime.AddSeconds(CacheDuration))
+                        if (DateTime.Now >= item.Value.OperateTime.AddMinutes(CacheDuration))
                         {
                             this.Remove(item.Key);
                         }

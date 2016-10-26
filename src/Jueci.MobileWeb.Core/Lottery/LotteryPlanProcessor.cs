@@ -245,7 +245,9 @@ namespace Jueci.MobileWeb.Lottery
 
             if (lotteryPlanLib.IsNeedAccessRight && string.IsNullOrEmpty(vcode))
             {
-                result = new ResultMessage<T>(ResultCode.NotAllowed, MessageTips.NoAccessRight);
+                result = isRepeatedValid ?
+                    new ResultMessage<T>(ResultCode.NotAllowed, MessageTips.NoAccessCode) :
+                    new ResultMessage<T>(ResultCode.NotAllowed, MessageTips.NoAccessRight);
                 return false;
             }
             if (lotteryPlanLib.IsNeedAccessRight && !lotteryPlanLib.VCode.Equals(vcode, StringComparison.OrdinalIgnoreCase))

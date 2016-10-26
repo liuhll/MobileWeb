@@ -29,6 +29,8 @@ namespace Jueci.MobileWeb.Common
 
         public const string NoAccessRight = "没有访问权限,请输入访问码后再尝试访问";
 
+        public const string NoAccessCode = "请输入访问码后再尝试访问";
+
         public const string AccessCodeError = "您输入的访问码错误,请重新输入";
 
         public const string AccessCodeChange = "访问超时或是访问码已经被所有者修改，请重新输入";
