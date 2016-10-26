@@ -18,9 +18,9 @@ namespace Jueci.MobileWeb.Lottery.Impl
         }
 
 
-        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, string vcode, CPType cpType)
+        public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, string vcode, CPType cpType, bool isRepeatedValid = false)
         {
-            return _lotteryPlanProcessor.GetUserPlanInfos(id, vcode, cpType);
+            return _lotteryPlanProcessor.GetUserPlanInfos(id, vcode, cpType, isRepeatedValid);
         }
 
         public ResultMessage<IList<UserPlanInfo>> GetUserPlanInfos(string id, CPType cpType, bool isNeedValidVcode = false)
@@ -36,6 +36,11 @@ namespace Jueci.MobileWeb.Lottery.Impl
         public ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, CPType cpType)
         {
             return _lotteryPlanProcessor.GetUserPlanDetail(id, cpType);
+        }
+
+        public ResultMessage<IList<UserPlanDetail>> GetUserPlanDetail(string id, string vcode, CPType cpType, bool isRepeatedValid)
+        {
+            return _lotteryPlanProcessor.GetUserPlanDetail(id, vcode, cpType, isRepeatedValid);
         }
 
         public ResultMessage<UserPlanDetail> GetUserPlanDetailPosition(string id, string planName, CPType cpType)

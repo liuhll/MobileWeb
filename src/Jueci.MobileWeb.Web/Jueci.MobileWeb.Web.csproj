@@ -592,6 +592,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Filters\" />
     <Folder Include="images\ssc\" />
   </ItemGroup>
   <ItemGroup>

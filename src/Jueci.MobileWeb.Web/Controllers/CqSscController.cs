@@ -31,6 +31,7 @@ namespace Jueci.MobileWeb.Web.Controllers
         }
 
         // GET: Ssc
+
         public ActionResult Planshare(string id)
         {
             var vcode = GetSessionValue<string>(id);
@@ -58,7 +59,7 @@ namespace Jueci.MobileWeb.Web.Controllers
         [DisableAbpAntiForgeryTokenValidation]
         public JsonResult Planshare([FromBody]AccessCodeViewModel model)
         {
-            var userPlanInfoResult = _sscPlanAppService.GetUserPlanInfos(model.Id, model.Vcode, CPType.cqssc);
+            var userPlanInfoResult = _sscPlanAppService.GetUserPlanInfos(model.Id, model.Vcode, CPType.cqssc,true);
 
             if (userPlanInfoResult.Code != ResultCode.Success)
             {
@@ -85,7 +86,9 @@ namespace Jueci.MobileWeb.Web.Controllers
                     return View("PlanAccessCode");
                 }
             }
-            var userPlanDetail = _sscPlanAppService.GetUserPlanDetail(id, CPType.cqssc);
+            var userPlanDetail = string.IsNullOrEmpty(vcode) ? 
+                _sscPlanAppService.GetUserPlanDetail(id, CPType.cqssc) :
+                _sscPlanAppService.GetUserPlanDetail(id,vcode,CPType.cqssc,true);
             if (userPlanDetail.Code != ResultCode.Success)
             {
                 return new HttpNotFoundResult(userPlanDetail.Msg);

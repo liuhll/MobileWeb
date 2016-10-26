@@ -4,6 +4,7 @@
     ViewBag.isNeedBackBtn = false;
     //string msg = ViewBag.Message ?? string.Empty;
     string returnUrl = ViewBag.ReturnUrl ?? string.Empty;
+    string tips = ViewBag.Message ?? string.Empty;
 }
 
 @section Scripts{
@@ -18,7 +19,7 @@
         <label for="Vcode">请输入访问码:</label>
         <input type="text" name="Vcode" id="vcode" value=""/>
     </div>
-    <label id="tips"></label>
+    <label id="tips">@tips</label>
     <fieldset class="ui-grid-a" style="margin: 0 auto">
         
         <button type="button" id="btnOK" data-theme="a">确认</button>
