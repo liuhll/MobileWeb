@@ -37,6 +37,7 @@ function getNewLottery() {
         "url": abp.appPath + "api/Lottery",
         "dataType": "json",
         "type": 'get',
+        "data": { 'cpType': $('#cptype').val() },
         "success": function (data) {
             var lotteryData = data["data"];
 
@@ -50,7 +51,7 @@ function getNewLottery() {
                 $('div[id*="tab"].tab-container').each(function (i) {
                     var tabIndex = i + 1;
                     $.ajax({
-                        "url": abp.appPath + "app/CqSsc/userPlanDetailClock",
+                        "url": abp.appPath + "app/"+$("#cptype").val()+"/userPlanDetailClock",
                         "data": { 'id': $('#PlanId').val(), 'planName': $('#planName' + tabIndex).val(), 'tabIndex': tabIndex },
                         "dataType": "html",
                         "type": 'get',
@@ -60,7 +61,7 @@ function getNewLottery() {
                     });
 
                     $.ajax({
-                        "url": abp.appPath + "app/CqSsc/userPlanDetailInfo",
+                        "url": abp.appPath + "app/" + $("#cptype").val() + "/userPlanDetailInfo",
                         "data": { 'id': $('#PlanId').val(), 'planName': $('#planName' + tabIndex).val() },
                         "dataType": "html",
                         "type": 'get',
@@ -70,7 +71,7 @@ function getNewLottery() {
                     });
 
                     $.ajax({
-                        "url": abp.appPath + "app/CqSsc/userPlanDetailList",
+                        "url": abp.appPath + "app/" + $("#cptype").val() + "/userPlanDetailList",
                         "data": { 'id': $('#PlanId').val(), 'planName': $('#planName' + tabIndex).val() },
                         "dataType": "html",
                         "type": 'get',

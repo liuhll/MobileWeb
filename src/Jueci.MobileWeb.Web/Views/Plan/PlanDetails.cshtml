@@ -29,11 +29,11 @@
         <div class="find_nav_left">
             <div @*data-role="navbar"data-theme="a"*@ class="find_nav_list">
                 <ul>
-                    @Html.Partial("_UserPlanDetailTabs", Model)
+                    @Html.Partial("~/Views/Plan/_UserPlanDetailTabs.cshtml", Model)
                 </ul>
             </div>
         </div>
     </div>
-    @Html.Partial("_UserPlanDetailContent", Model)
+    @Html.Partial("~/Views/Plan/_UserPlanDetailContent.cshtml", Model)
 </div>
 

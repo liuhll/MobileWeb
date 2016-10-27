@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using Abp.Web.Security.AntiForgery;
 using Abp.WebApi.Controllers;
 using Camew.Lottery;
 using Camew.Lottery.AppService;
 using Jeuci.SalesSystem.Entities.Common;
+using Jueci.MobileWeb.Common.Tools;
 using Jueci.MobileWeb.Lottery;
 using Jueci.MobileWeb.Lottery.Models;
 using Jueci.MobileWeb.Lottery.Models.Transfer;
@@ -34,38 +36,40 @@ namespace Jueci.MobileWeb.Api.Controllers
         /// 获取用户计划信息
         /// </summary>
         /// <param name="id">用户分享的计划Id</param>
+        /// <param name="cpType">彩票类型</param>
         /// <returns>返回用户计划信息</returns>
         /// <remarks>返回用户的计划详情</remarks>         
         [HttpGet]
         [Route("{id:string}")]
-        public ResultMessage<IList<UserPlanInfo>> UserPlan(string id)
+        public ResultMessage<IList<UserPlanInfo>> UserPlan(string id,string cpType)
         {
-            return _lotteryPlanAppService.GetUserPlanInfos(id, CPType.cqssc);
+            return _lotteryPlanAppService.GetUserPlanInfos(id,ConvertHelper.StringToEnum<CPType>(cpType));
         }
 
         /// <summary>
         /// 获取下一期开奖信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="cpType"></param>
         /// <returns></returns> 
         /// <remarks>获取下一期开奖信息</remarks>                 
         [HttpGet]
         //        [Route("api/lottery/clock")]
-        public ResultMessage<NewLottery> Clock()
+        public ResultMessage<NewLottery> Clock(string cpType)
         {
-            return _lotteryPlanAppService.GetNewLottery(CPType.cqssc);
+            return _lotteryPlanAppService.GetNewLottery(ConvertHelper.StringToEnum<CPType>(cpType));
         }
 
         /// <summary>
         /// 获取用户分享计划信息详情
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="cpType"></param>
         /// <returns></returns>
         /// <remarks>获取用户分享计划信息详情</remarks> 
         [HttpGet]
-        public ResultMessage<IList<UserPlanDetail>> UserPlanDetail(string id)
+        public ResultMessage<IList<UserPlanDetail>> UserPlanDetail(string id,string cpType)
         {
-            return _lotteryPlanAppService.GetUserPlanDetail(id, CPType.cqssc);
+            return _lotteryPlanAppService.GetUserPlanDetail(id, ConvertHelper.StringToEnum<CPType>(cpType));
         }
 
         /// <summary>
@@ -78,7 +82,19 @@ namespace Jueci.MobileWeb.Api.Controllers
         [DisableAbpAntiForgeryTokenValidation]
         public ResultMessage<bool> UpdateUserPlanCache([FromBody] PlanCacheArgs planCacheArgs)
         {
-            return _lotteryPlanAppService.UpdateUserPlanCache(CPType.cqssc, planCacheArgs);
+            CPType cpType ;
+            switch (planCacheArgs.Sid)
+            {
+                case 1:
+                    cpType= CPType.cqssc;
+                    break;
+                case 2:
+                    cpType = CPType.pks;
+                    break;
+                default:
+                    throw new Exception("没有您指定的服务类型的彩种！");
+            }
+            return _lotteryPlanAppService.UpdateUserPlanCache(cpType, planCacheArgs);
         }
 
 

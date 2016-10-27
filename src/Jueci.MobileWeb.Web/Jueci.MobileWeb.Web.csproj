@@ -529,6 +529,8 @@
     <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CqSscController.cs" />
+    <Compile Include="Controllers\PksController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Models\Common\ClockPage.cs" />
     <Compile Include="Models\Layout\LanguageSelectionViewModel.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
@@ -555,17 +557,17 @@
     <Content Include="Scripts\sweetalert\sweet-alert.scss" />
     <Content Include="Views\Shared\_HeadCloth.cshtml" />
     <Content Include="Views\Shared\_HeadCommon.cshtml" />
-    <Content Include="Views\CqSsc\PlanAccessCode.cshtml" />
-    <None Include="Views\CqSsc\Planshare.cshtml" />
-    <Content Include="Views\CqSsc\PlanDetails.cshtml" />
-    <Content Include="Views\CqSsc\_Clock.cshtml" />
-    <Content Include="Views\CqSsc\_UserPlanInfoList.cshtml" />
-    <Content Include="Views\CqSsc\_UserPlanDetailTabs.cshtml" />
-    <Content Include="Views\CqSsc\_UserPlanDetailContent.cshtml" />
-    <Content Include="Views\CqSsc\_PlanningDetailClock.cshtml" />
-    <Content Include="Views\CqSsc\_UserPlanDetailList.cshtml" />
-    <Content Include="Views\CqSsc\_UserPlanDetailInfo.cshtml" />
-    <Content Include="Views\CqSsc\_UserPlanDetailClock.cshtml" />
+    <Content Include="Views\Plan\PlanAccessCode.cshtml" />
+    <None Include="Views\Plan\Planshare.cshtml" />
+    <Content Include="Views\Plan\PlanDetails.cshtml" />
+    <Content Include="Views\Plan\_Clock.cshtml" />
+    <Content Include="Views\Plan\_UserPlanInfoList.cshtml" />
+    <Content Include="Views\Plan\_UserPlanDetailTabs.cshtml" />
+    <Content Include="Views\Plan\_UserPlanDetailContent.cshtml" />
+    <Content Include="Views\Plan\_PlanningDetailClock.cshtml" />
+    <Content Include="Views\Plan\_UserPlanDetailList.cshtml" />
+    <Content Include="Views\Plan\_UserPlanDetailInfo.cshtml" />
+    <Content Include="Views\Plan\_UserPlanDetailClock.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -595,6 +597,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
     <Folder Include="images\ssc\" />
+    <Folder Include="Views\Pks\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\ssc\layout.css" />

@@ -1,8 +1,7 @@
 ﻿@{
     bool isNeedBackBtn = ViewBag.isNeedBackBtn ?? true;
+  
 }
-
-
 
 <div data-role="header" data-theme="c" data-position="inline">
    @if (isNeedBackBtn)
@@ -19,7 +18,7 @@
     $(function() {
         $('#back').on('click', function () {
             // debugger;
-            location.href = abp.appPath + "app/cqssc/planshare/" + $('#PlanId').val();
+            location.href = abp.appPath + "app/"+$("#cptype").val()+"/planshare/" + $('#PlanId').val();
         });
     });
 </script>

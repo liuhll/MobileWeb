@@ -117,6 +117,7 @@
     <Compile Include="Common\MessageTips.cs" />
     <Compile Include="Common\ResultMessage.cs" />
     <Compile Include="Common\Tools\ConfigHelper.cs" />
+    <Compile Include="Common\Tools\ConvertHelper.cs" />
     <Compile Include="Common\Tools\DateTimeHelper.cs" />
     <Compile Include="Common\Tools\EncryptionHelper.cs" />
     <Compile Include="Lottery\Config\EngineAttachPropertyKey.cs" />

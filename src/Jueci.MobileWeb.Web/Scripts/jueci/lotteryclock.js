@@ -5,9 +5,9 @@
 
 function nextLotteryClock() {
     var _interval = 1000;
-    
+
     var nextLotteryTime = Clock.countdown(Clock.getEndDate($('#NextPeriodTimePoint').val()));
-      // console.log(nextLotteryTime);
+    // console.log(nextLotteryTime);
     var timer = null;
     if (!nextLotteryTime.isRequestServer) {
         if (nextLotteryTime.hour.isNeedDisplay) {
@@ -39,6 +39,7 @@ function getNewLottery() {
         //"data": { 'id': $('#PlanId').val() },
         "dataType": "json",
         "type": 'get',
+        "data": { 'cpType': $('#cptype').val() },
         "success": function (data) {
             var lotteryData = data["data"];
 
@@ -57,24 +58,24 @@ function getNewLottery() {
 
                 if ($('#accessPage').val()) {
                     setTimeout("nextLotteryClock();", _interval);
-                }else {
-                     $.ajax({
-                    "url": abp.appPath + "app/cqssc/userPlanInfoList",
-                    "data": { 'id': $('#PlanId').val() },
-                    "dataType": "html",
-                    "type": 'get',
-                    "beforeSend": function () {
-                        $.fn.Loader(true);
-                },
-                    "success": function (data1) {
-                        $('#userPlanInfoList').html(data1);
-                        setTimeout("nextLotteryClock();", _interval);
-                      
-                },
-                    "complete": function () {
-                        $.fn.Loader(false);
-                }
-                });
+                } else {
+                    $.ajax({
+                        "url": abp.appPath + "app/" + $("#cptype").val() + "/userPlanInfoList",
+                        "data": { 'id': $('#PlanId').val() },
+                        "dataType": "html",
+                        "type": 'get',
+                        "beforeSend": function () {
+                            $.fn.Loader(true);
+                        },
+                        "success": function (data1) {
+                            $('#userPlanInfoList').html(data1);
+                            setTimeout("nextLotteryClock();", _interval);
+
+                        },
+                        "complete": function () {
+                            $.fn.Loader(false);
+                        }
+                    });
                 }
 
 

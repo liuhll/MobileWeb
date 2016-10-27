@@ -6,6 +6,7 @@
 @{
     string planId = ViewBag.PlanId;
     int i = 1;
+    string cpype = ViewBag.CpType;
 }
 
 @if (Request.IsAjaxRequest())
@@ -58,7 +59,7 @@
     $(function() {
         $('li').on('click', function () {
            // debugger;
-            location.href = abp.appPath + "app/cqssc/plandetails/" + $('#PlanId').val() + "?tabIndex=" + $(this).data('tabindex');//$(this).data('tabindex')
+            location.href = abp.appPath + "app/"+$("#cptype").val()+"/plandetails/" + $('#PlanId').val() + "?tabIndex=" + $(this).data('tabindex');//$(this).data('tabindex')
         });
     });
 </script>

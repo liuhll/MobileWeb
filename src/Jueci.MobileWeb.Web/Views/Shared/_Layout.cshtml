@@ -5,6 +5,7 @@
 @{
     SetAntiForgeryCookie();
     bool isHomePage = ViewBag.IsHomePage ?? false;
+    string cpype = ViewBag.CpType;
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +61,7 @@
         {
             @Html.Partial("_HeadCommon")
         }
-
+        @Html.Hidden("cptype",cpype)
         <div data-role="content" class="content-body">
             @RenderBody()
         </div>
