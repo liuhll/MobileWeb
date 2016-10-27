@@ -40,8 +40,12 @@
                     console.log(data["result"]);
                     var arData = data["result"];
                     if (arData["hasAccessRight"]) {
-                        debugger;
-                        location.href = abp.appPath + arData["returnUrl"];
+                        if (arData["returnUrl"].indexOf('?')>0) {
+                            location.href = abp.appPath + arData["returnUrl"] + "&jueci";
+                        } else {
+                            location.href = abp.appPath + arData["returnUrl"] + "?jueci";
+                        }
+                       
                     } else {
                         $("#tips").text(arData["messageTips"]);
                         $("#ReturnUrl").text(arData["returnUrl"]);

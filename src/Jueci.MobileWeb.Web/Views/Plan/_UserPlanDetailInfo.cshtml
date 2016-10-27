@@ -1,4 +1,7 @@
 ﻿@model Jueci.MobileWeb.Lottery.Models.Transfer.UserPlanDetail
+@{
+    int j = 1;
+}
 
 @if (Request.IsAjaxRequest())
 {
@@ -10,10 +13,16 @@
     <div class="fl tab-section2-sect"><span>最大连对</span><span class="font-emphasize">@Model.MaxAlwaysRight</span></div>
     <div class="fl tab-section2-sect"><span>最大连错</span><span class="font-emphasize">@Model.MaxAlwaysWrong</span></div>
     <div class="fl tab-section2-sect"><span>当前连对/错</span><span class="font-emphasize">@Model.CurrentROrW</span></div>
-    <div class="fl tab-section2-sect"><span>第1期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[0]))</span></div>
-    <div class="fl tab-section2-sect"><span>第2期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[1]))</span></div>
-    <div class="fl tab-section2-sect"><span>第3期中</span><span class="font-emphasize">@Html.Raw(string.Format("{0}次", Model.RightTimes[2]))</span></div>
-
+    
+    @foreach (var rightTime in Model.RightTimes)
+    {
+        <div class="fl tab-section2-sect">
+            <span>@Html.Raw(string.Format("第{0}期中", j))</span>
+            <span class="font-emphasize">@Html.Raw(string.Format("{0}次", rightTime))</span>
+        </div>
+        j++;
+    }
+   
     <div class="clearfix"></div>
 </div>
 
