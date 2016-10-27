@@ -11,6 +11,6 @@ namespace Jueci.MobileWeb.Lottery.Models
 
         public string PlanComputionInfo { get; set; }
 
-        public DateTime UpdateTime { get; set; }
+        public DateTime? UpdateTime { get; set; }
     }
 }
