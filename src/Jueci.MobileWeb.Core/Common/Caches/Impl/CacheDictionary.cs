@@ -35,6 +35,7 @@ namespace Jueci.MobileWeb.Common.Caches.Impl
                         if (DateTime.Now >= item.Value.OperateTime.AddMinutes(CacheDuration))
                         {
                             this.Remove(item.Key);
+                            LogHelper.Logger.Info(string.Format("缓存定时器将缓存计划库中key值为{0}的计划从中移除",item.Key));
                         }
                     }
                 }

@@ -21,10 +21,6 @@
 
     @Styles.Render("~/Bundles/vendor/css")
     <link href="~/Content/ssc/layout.css" rel="stylesheet"/>
-    @*@if (!BrowerChecker.IsMoblie(Request))
-    {
-        <link href="~/Content/ssc/pclayout.css" rel="stylesheet" />
-    }*@
 
     <!-- View specific styles -->
     @RenderSection("styles", required: false)
@@ -44,9 +40,7 @@
 
 </head>
 <body>
-@*<div id="wrap">
 
-</div>*@
 <div data-role="page">
     <div id="wrap">
         @if (isHomePage)

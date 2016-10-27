@@ -180,7 +180,7 @@ namespace Jueci.MobileWeb.Lottery
             if (!planlibPolicy.IsLegalSign())
             {
 
-                LogHelper.Logger.Warn(MessageTips.NotValidTime);
+                LogHelper.Logger.Warn(MessageTips.NotLegalSign);
                 return new ResultMessage<bool>(ResultCode.Fail, MessageTips.NotLegalSign, false);
             }
 

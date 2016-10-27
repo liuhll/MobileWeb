@@ -16,7 +16,7 @@
     <div style="margin-top: 10px">
         @foreach (var item in Model.LotteryResult)
         {
-            <span class="number-circle number-circle-normal" style="margin: 0 5px">@Html.Raw(item)</span>
+            <span class="number-circle @Html.Raw(Model.LotteryResult.Count <= 6 ? "number-circle-normal lottery-result-less" : "number-circle-more lottery-result-more")" >@Html.Raw(item)</span>
         }
 
     </div>

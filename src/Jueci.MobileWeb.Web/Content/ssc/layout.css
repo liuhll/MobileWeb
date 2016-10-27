@@ -63,6 +63,22 @@ img {
     color: #3D96EA;
 }
 
+ .number-circle-more {
+     border: 1px solid;
+     width: 20px;
+     height: 20px;
+     font-size: 9px;
+ }
+
+ .lottery-result-less {
+     margin: 0 5px;    
+ }
+
+ .lottery-result-more {
+     margin: 0 3px;
+     /*padding: 3px 1px;*/    
+ }
+
 .clock-img-container {
     margin-top: 2px;
 }
@@ -501,6 +517,15 @@ ol, ul, li {
  .number-circle-normal {
      border: 2px solid;
  }
+
+
+.number-circle-more {
+        border: 2px solid;
+        width: 25px;
+        height: 25px;
+        font-size: 15px;
+}
+
  .tab-lv-item-first span{
       margin: 0 2px;
       padding: 0 2px;

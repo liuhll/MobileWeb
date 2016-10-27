@@ -147,7 +147,7 @@ namespace Jueci.MobileWeb.Lottery.Service
             switch (cpType)
             {
                 case CPType.cqssc:
-                    serviceName = "重启时时彩";
+                    serviceName = "重庆时时彩";
                     break;
                 case CPType.pks:
                     serviceName = "PK拾";
