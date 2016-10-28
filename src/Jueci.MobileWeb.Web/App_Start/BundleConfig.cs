@@ -21,6 +21,7 @@ namespace Jueci.MobileWeb.Web
                 );
 
 
+
             bundles.Add(
                 new ScriptBundle("~/Bundles/vendor/js")
                     .Include(
@@ -29,7 +30,9 @@ namespace Jueci.MobileWeb.Web
                         "~/Scripts/jquery-2.1.4.min.js",
                         "~/Scripts/jquery-ui-1.11.4.min.js",
 
-                        "~/Abp/Lib/jquery.mobile/jquery.mobile-1.4.5.js"
+                        "~/Abp/Lib/jquery.mobile/jquery.mobile-1.4.5.js",
+                        "~/Scripts/jueci/mobilecheck.js",
+                        "~/Scripts/jueci/loader.js"
                     )
                 );
          

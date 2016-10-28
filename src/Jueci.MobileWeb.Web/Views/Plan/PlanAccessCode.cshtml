@@ -41,7 +41,7 @@
                     var arData = data["result"];
                     if (arData["hasAccessRight"]) {
                         if (arData["returnUrl"].indexOf('?')>0) {
-                            location.href = abp.appPath + arData["returnUrl"] + "&jueci";
+                            location.href = abp.appPath + arData["returnUrl"];
                         } else {
                             location.href = abp.appPath + arData["returnUrl"] + "?jueci";
                         }

@@ -43,45 +43,37 @@ function getNewLottery() {
 
             if (lotteryData['currentPeriod'] > currentPeriod) {
 
-                $('.number-circle.number-circle-small').each(function (i) {
-                    var j = i % lotteryData['lotteryResult'].length;
-                    $(this).text(lotteryData['lotteryResult'][j]);
+                $.ajax({
+                    "url": abp.appPath + "app/" + $("#cptype").val() + "/userPlanDetailContent",
+                    "data": { 'id': $('#PlanId').val(), "currentTabIndex": $('#CurrentTabIndex').val() },
+                    "dataType": "html",
+                    "type": 'get',
+                    "beforeSend": function () {
+                        Loader(true);
+                          
+                    },
+                    "success": function (data3) {
+                        if (data3.indexOf('>') > 0) {
+                            $('#userPlanDetailContent').html(data3);
+                            setTimeout("nextLotteryClock();", _interval);
+                        } else {
+                            var resultObj = JSON.parse(data3);
+                            var arData = resultObj["result"];
+                            if (arData["returnUrl"].indexOf('?') > 0) {
+                                location.href = abp.appPath + arData["returnUrl"];
+                            } else {
+                                location.href = abp.appPath + arData["returnUrl"] + "?jueci";
+                            }
+                        }
+
+                    },
+                    "complete": function () {
+                        Loader(false);
+                          
+                    }
+
                 });
 
-                $('div[id*="tab"].tab-container').each(function (i) {
-                    var tabIndex = i + 1;
-                    $.ajax({
-                        "url": abp.appPath + "app/"+$("#cptype").val()+"/userPlanDetailClock",
-                        "data": { 'id': $('#PlanId').val(), 'planName': $('#planName' + tabIndex).val(), 'tabIndex': tabIndex },
-                        "dataType": "html",
-                        "type": 'get',
-                        "success": function (data1) {
-                            $('#tab-section1-' + tabIndex).html(data1);
-                        }
-                    });
-
-                    $.ajax({
-                        "url": abp.appPath + "app/" + $("#cptype").val() + "/userPlanDetailInfo",
-                        "data": { 'id': $('#PlanId').val(), 'planName': $('#planName' + tabIndex).val() },
-                        "dataType": "html",
-                        "type": 'get',
-                        "success": function (data2) {
-                            $('#tab-section2-' + tabIndex).html(data2);
-                        }
-                    });
-
-                    $.ajax({
-                        "url": abp.appPath + "app/" + $("#cptype").val() + "/userPlanDetailList",
-                        "data": { 'id': $('#PlanId').val(), 'planName': $('#planName' + tabIndex).val() },
-                        "dataType": "html",
-                        "type": 'get',
-                        "success": function (data3) {
-                            $('#tab-section3-' + tabIndex).html(data3);
-                        }
-                    });
-
-                });
-                setTimeout("nextLotteryClock();", _interval);
 
             } else {
                 $('.clock').addClass('clock-hide');
@@ -95,3 +87,19 @@ function getNewLottery() {
         }
     });
 }
+
+function Loader(show) {
+    if (show) {
+        //显示加载器.for jQuery Mobile 1.2.0  
+        $.mobile.loading('show', {
+            text: '加载中...', //加载器中显示的文字  
+            textVisible: true, //是否显示文字  
+            theme: 'a',        //加载器主题样式a-e  
+            textonly: false,   //是否只显示文字  
+            html: ""           //要显示的html内容，如图片等  
+        });
+    } else {
+        $.mobile.loading('hide');
+    }
+}
+

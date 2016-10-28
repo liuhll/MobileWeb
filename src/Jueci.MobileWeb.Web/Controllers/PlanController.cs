@@ -127,6 +127,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             return PartialView("~/Views/Plan/_UserPlanInfoList.cshtml", userPlanInfo.Data);
         }
 
+        [Obsolete]
         public PartialViewResult UserPlanDetailClock(string id, string planName, int tabIndex)
         {
             var userPlanDetail = _planAppService.GetUserPlanDetailPosition(id, planName, _cpType);
@@ -137,6 +138,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             return PartialView("~/Views/Plan/_UserPlanDetailClock.cshtml", new UserPlanDetailClock(tabIndex, userPlanDetail.Data));
         }
 
+        [Obsolete]
         public PartialViewResult UserPlanDetailInfo(string id, string planName)
         {
             var userPlanDetail = _planAppService.GetUserPlanDetailPosition(id, planName, _cpType);
@@ -147,6 +149,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             return PartialView("~/Views/Plan/_UserPlanDetailInfo.cshtml", userPlanDetail.Data);
         }
 
+        [Obsolete]
         public PartialViewResult UserPlanDetailList(string id, string planName)
         {
             var userPlanDetail = _planAppService.GetUserPlanDetailPosition(id, planName, _cpType);
@@ -155,6 +158,30 @@ namespace Jueci.MobileWeb.Web.Controllers
                 throw new Exception("get  UserPlanDetailClock error!");
             }
             return PartialView("~/Views/Plan/_UserPlanDetailList.cshtml", userPlanDetail.Data);
+        }
+
+        public ActionResult UserPlanDetailContent(string id, int currentTabIndex)
+        {
+            string vcode = GetSessionValue<string>(id);
+            if (string.IsNullOrEmpty(vcode))
+            {
+                var result = _planAppService.IsNeedAccessRight(id, _cpType);
+                if (result.Data)
+                {
+                    string returnUrl = string.Format("app/{0}/plandetails/{1}?tabIndex={2}",_cpType.ToString(),id,currentTabIndex);
+                    return Json(new AccessRightResult(true, result.Msg, returnUrl),JsonRequestBehavior.AllowGet);
+                }
+            }
+            var userPlanDetail = string.IsNullOrEmpty(vcode)
+                ? _planAppService.GetUserPlanDetail(id, _cpType)
+                : _planAppService.GetUserPlanDetail(id, vcode, _cpType, true);
+            if (userPlanDetail.Code != ResultCode.Success)
+            {
+                return new HttpNotFoundResult(userPlanDetail.Msg);
+            }
+            ViewBag.PlanId = id;
+            ViewBag.TabIndex = currentTabIndex;
+            return PartialView("~/Views/Plan/_UserPlanDetailContent.cshtml", userPlanDetail.Data);
         }
 
     }

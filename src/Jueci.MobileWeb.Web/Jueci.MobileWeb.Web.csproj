@@ -492,6 +492,7 @@
     <Content Include="Scripts\jueci\clock.js" />
     <Content Include="Scripts\jueci\loader.js" />
     <Content Include="Scripts\jueci\lotteryclock.js" />
+    <Content Include="Scripts\jueci\mobilecheck.js" />
     <Content Include="Scripts\jueci\slide-tabs.js" />
     <Content Include="Scripts\jueci\swipe-panel.js" />
     <Content Include="Scripts\jueci\user-plandetail-clock.js" />

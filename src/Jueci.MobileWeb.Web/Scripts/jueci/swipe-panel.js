@@ -6,7 +6,9 @@
         if (currentTabIndex === $('.ui-state-default').length) {
             return;
         }
-        switchPlanDetailTab(currentTabIndex, nextTabIndex);
+        if (mobilecheck()) {
+            switchPlanDetailTab(currentTabIndex, nextTabIndex);
+        }
 
     });
 
@@ -17,8 +19,9 @@
         if (currentTabIndex === 1) {
             return false;
         }
-
-        switchPlanDetailTab(currentTabIndex, nextTabIndex);
+        if (mobilecheck()) {
+            switchPlanDetailTab(currentTabIndex, nextTabIndex);
+        }       
     });
 
     $(".ui-state-default").on('click', function () {
@@ -51,4 +54,6 @@ function switchPlanDetailTab(beferTabIndex, currentTabIndex) {
     $('#tab' + currentTabIndex).attr('style', 'background: #ffffff; padding: 0 0;');
     $('#tab' + currentTabIndex).attr('aria-expanded', 'true');
     $('#tab' + currentTabIndex).attr('aria-hidden', 'false');
+
+    $('#CurrentTabIndex').val(currentTabIndex);
 }

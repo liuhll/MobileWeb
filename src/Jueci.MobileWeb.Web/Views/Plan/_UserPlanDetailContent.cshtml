@@ -1,9 +1,14 @@
-﻿@using Jueci.MobileWeb.Web.Models.Common
-@using Jueci.MobileWeb.Web.Models.UserPlanDetail
+﻿@using Jueci.MobileWeb.Web.Models.UserPlanDetail
 @model IList<Jueci.MobileWeb.Lottery.Models.Transfer.UserPlanDetail>
 
 @{
     int tabIndex = 1;
+}
+@if (Request.IsAjaxRequest())
+{
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Abp/Lib/jquery.mobile/jquery.mobile-1.4.5.js"></script>
+    <script src="~/Scripts/jueci/loader.js"></script>
 }
 
 @foreach (var item in Model)
