@@ -16,7 +16,7 @@
 }
 
 <input type="hidden" id="accessPage" value="true" />
-<form id="form1" class="form-horizontal form-access-code">
+<form id="form1" class="form-horizontal form-access-code" onsubmit="return false;">
 
     @Html.Hidden("Id", (string)ViewBag.PlanId)
     @Html.Hidden("ReturnUrl", returnUrl)
@@ -31,29 +31,46 @@
 <script type="text/javascript">
     $(function () {
         $("#vcode").focus();
-        $('#btnOK').on('click', function () {
-            $.ajax({
-                url: abp.appPath + "app/" + $('#cptype').val() + "/planshare",
-                datatype: 'json',
-                type: 'post',
-                data: $('#form1').serializeJSON(),
-                success: function (data) {
-                    console.log(data["result"]);
-                    var arData = data["result"];
-                    if (arData["hasAccessRight"]) {
-                        if (arData["returnUrl"].indexOf('?') > 0 && arData["returnUrl"].indexOf('&')<=0) {
-                            location.href = abp.appPath + arData["returnUrl"] + "&jueci";
-                        } else {
-                            location.href = abp.appPath + arData["returnUrl"] + "?jueci";
-                        }
-                       
-                    } else {
-                        $("#tips").text(arData["messageTips"]);
-                        $("#ReturnUrl").text(arData["returnUrl"]);
-                    }
-                }
-
-            });
+        $('#btnOK').on('click', function (event) {
+           event.preventDefault();
+            accessCode();
         });
+        $('#btnOK').on('keydown', function (event) {
+            accessCode();
+        });
+        $('#vcode').keydown(function (event) {
+            var keycode = (event.keyCode ? event.keyCode : event.which);
+            if (keycode === 13) {
+                accessCode();
+              
+            }
+        });
+
     });
+
+    function accessCode() {
+        $.ajax({
+            url: abp.appPath + "app/" + $('#cptype').val() + "/planshare",
+            datatype: 'json',
+            type: 'post',
+            data: $('#form1').serializeJSON(),
+            success: function (data) {
+                console.log(data["result"]);
+                var arData = data["result"];
+                if (arData["hasAccessRight"]) {
+                    if (arData["returnUrl"].indexOf('?') > 0 && arData["returnUrl"].indexOf('&') <= 0) {
+                        location.href = abp.appPath + arData["returnUrl"] + "&jueci";
+                    } else {
+                        location.href = abp.appPath + arData["returnUrl"] + "?jueci";
+                    }
+
+                } else {
+                    $("#tips").text(arData["messageTips"]);
+                    $("#ReturnUrl").text(arData["returnUrl"]);
+                    $("#vcode").focus();
+                }
+            }
+
+        });
+    }
 </script>

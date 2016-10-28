@@ -59,11 +59,7 @@ function getNewLottery() {
                         } else {
                             var resultObj = JSON.parse(data3);
                             var arData = resultObj["result"];
-                            if (arData["returnUrl"].indexOf('?') > 0) {
-                                location.href = abp.appPath + arData["returnUrl"];
-                            } else {
-                                location.href = abp.appPath + arData["returnUrl"] + "?jueci";
-                            }
+                            location.href = abp.appPath + arData["returnUrl"];
                         }
 
                     },
