@@ -30,6 +30,7 @@
 </form>
 <script type="text/javascript">
     $(function () {
+        $("#vcode").focus();
         $('#btnOK').on('click', function () {
             $.ajax({
                 url: abp.appPath + "app/" + $('#cptype').val() + "/planshare",
@@ -40,8 +41,8 @@
                     console.log(data["result"]);
                     var arData = data["result"];
                     if (arData["hasAccessRight"]) {
-                        if (arData["returnUrl"].indexOf('?')>0) {
-                            location.href = abp.appPath + arData["returnUrl"];
+                        if (arData["returnUrl"].indexOf('?') > 0 && arData["returnUrl"].indexOf('&')<=0) {
+                            location.href = abp.appPath + arData["returnUrl"] + "&jueci";
                         } else {
                             location.href = abp.appPath + arData["returnUrl"] + "?jueci";
                         }
