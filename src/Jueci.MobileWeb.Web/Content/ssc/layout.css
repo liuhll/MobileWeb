@@ -93,6 +93,14 @@ img {
 
 .number-container {
     /*margin-right: 80px;*/
+    /*margin-bottom: 10px;*/  
+}
+
+ .current-period-display{
+    padding-top: 3px; 
+    margin-left: 4px;
+    margin-bottom: 10px;  
+    margin-right: 20px
 }
 
 .lv-item-ds {
