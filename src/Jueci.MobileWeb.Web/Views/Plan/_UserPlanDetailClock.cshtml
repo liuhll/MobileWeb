@@ -9,10 +9,6 @@
     }
 }
 
-@if (Request.IsAjaxRequest())
-{
-    <link href="~/Content/ssc/layout.css" rel="stylesheet" />
-}
 
 <div class="tab-section1-first">
     @Html.Action("Clock", new { ClockPage = ClockPage.PlanningDetail })

@@ -3,11 +3,6 @@
     int j = 1;
 }
 
-@if (Request.IsAjaxRequest())
-{
-    <link href="~/Content/ssc/layout.css" rel="stylesheet" />
-}
-
 <div class="tab-section2-line">
     <div class="fl tab-section2-sect"><span>准确率</span><span class="font-emphasize">@Html.Raw(string.Format("{0}%", Model.RightRate * 100))</span></div>
     <div class="fl tab-section2-sect"><span>最大连对</span><span class="font-emphasize">@Model.MaxAlwaysRight</span></div>
