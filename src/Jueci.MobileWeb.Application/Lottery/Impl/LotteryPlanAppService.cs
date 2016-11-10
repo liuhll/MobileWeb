@@ -58,6 +58,11 @@ namespace Jueci.MobileWeb.Lottery.Impl
             return _lotteryPlanProcessor.IsNeedAccessRight(id, cpType);
         }
 
+        public PlanLibTitle GetPlanLibTitle(string id, CPType cpType)
+        {
+            return _lotteryPlanProcessor.GetPlanLibTitle(id, cpType);
+        }
+
         //public ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType)
         //{
         //    return _lotteryPlanProcessor.GetPlanComputionInfos(id, cpType);

@@ -8,7 +8,8 @@ namespace Jueci.MobileWeb.Web.Controllers
         public CqSscController(ILotteryPlanAppService planAppService) 
             : base(planAppService,CPType.cqssc)
         {
-            ViewBag.PlanTitle = "重庆时时彩计划";
+            //ViewBag.PlanTitle = "掌赢专家";
+            //ViewBag.SubPlanTitle = "重庆时时彩计划";
         }
     }
 }

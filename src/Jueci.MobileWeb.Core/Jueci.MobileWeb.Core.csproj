@@ -112,6 +112,7 @@
     <Compile Include="Common\Caches\ICacheDictionary.cs" />
     <Compile Include="Common\Caches\ICacheObject.cs" />
     <Compile Include="Common\Caches\Impl\CacheDictionary.cs" />
+    <Compile Include="Common\Enums\PlanLibState.cs" />
     <Compile Include="Common\Enums\ResultCode.cs" />
     <Compile Include="Common\JueciException.cs" />
     <Compile Include="Common\MessageTips.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Lottery\Models\LotteryPlanLib.cs" />
     <Compile Include="Lottery\Models\PlanCacheArgs.cs" />
     <Compile Include="Lottery\Models\PlanComputionBase.cs" />
+    <Compile Include="Lottery\Models\Transfer\PlanLibTitle.cs" />
     <Compile Include="Lottery\Models\UserPlanComputionInfo.cs" />
     <Compile Include="Lottery\Models\Transfer\NewLottery.cs" />
     <Compile Include="Lottery\Models\Transfer\PlanDetailList.cs" />

@@ -28,5 +28,7 @@ namespace Jueci.MobileWeb.Lottery
 
        // ResultMessage<List<PlanComputionInfo>> GetPlanComputionInfos(string id, CPType cpType);
         ResultMessage<bool> IsNeedAccessRight(string id, CPType cpType);
+
+        PlanLibTitle GetPlanLibTitle(string id, CPType cpType);
     }
 }

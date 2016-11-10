@@ -44,6 +44,11 @@ namespace Jueci.MobileWeb.Web.Controllers
 
             ViewBag.OfficialWebsite = ConfigHelper.GetValuesByKey("OfficialWebsite");
             ViewBag.PlanId = id;
+
+            var planTitleInfo = _planAppService.GetPlanLibTitle(id, _cpType);
+            ViewBag.PlanTitle = planTitleInfo.PlanTitle;
+            ViewBag.SubPlanTitle = planTitleInfo.SubPlanTitle;
+
             if (userPlanInfoResult.Code == ResultCode.NotAllowed)
             {
                 ViewBag.ReturnUrl = Request.RawUrl.Substring(1);

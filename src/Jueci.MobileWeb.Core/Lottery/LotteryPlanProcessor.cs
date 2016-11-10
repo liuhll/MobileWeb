@@ -220,6 +220,18 @@ namespace Jueci.MobileWeb.Lottery
         //    return new ResultMessage<List<PlanComputionInfo>>(planComputionInfos);
         //}
 
+        public PlanLibTitle GetPlanLibTitle(string id, CPType cpType)
+        {
+            var lotteryEngine = _lotteryServiceManager.GetServiceManager(cpType).LotteryEngine;
+            var lotteryPlanLib = _lotteryPlanManager.GetComputionData(id, lotteryEngine).LotteryPlanLib;
+        
+            return new PlanLibTitle(cpType, lotteryPlanLib.State)
+            {
+                PlanTitle = lotteryPlanLib.TeamName,
+                SubPlanTitle = lotteryPlanLib.Contact
+            };
+        }
+
 
         #region 私有方法
         private List<PlanComputionInfo> UpdateComptionInfo(string id, CPType cpType)
