@@ -113,10 +113,20 @@ img {
     background: transparent !important;
     font-weight: normal !important;
     border-color: #EFEFEF;
+    cursor: default;
+}
+
+.can-select-text {
+    user-select:text; 
+    -moz-user-select: text;  
+    -webkit-user-select: text;  
+    -ms-user-select: text;  
 }
 
 .ui-content-gray {
     background: #FAFAFA !important;
+    
+    cursor: default;
 }
 
 .ui-listview > li > a.ui-btn {
@@ -207,12 +217,29 @@ img {
     text-align: center;
 }
 
-
+.lv-item span:hover {
+    
+}
 
 .lv-item-q {
     font-size: 12px;
     font-weight: normal;
     color: #878787;
+}
+
+.text-copy:hover {
+    cursor: text;
+}
+
+.lv-item-title:hover {
+    cursor: pointer;
+}
+
+.lv-item-detail{
+    color: #3D96EA;
+    margin-right: 20px;
+    cursor: pointer;
+    /*float: right*/
 }
 
 
@@ -494,16 +521,9 @@ ol, ul, li {
  .ui-page {
         background-color: #f6f6f6 !important;
     }
- .lv-item-title {
-     color: #3C3C3C;
- }
- .lv-item-q {
-     color: #3C3C3C;
- }
 
  .tab-section1,.tab-section2,.tab-section3,.tab-lv-item-fi,.tab-lv-item-first,.tab-lv-item-second {
-     color: #3C3C3C;
-     font-weight: normal;
+   /*font-weight: normal;*/
  }
 
  .lv-item-progress-box {

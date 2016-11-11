@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-using Abp.Web.Models;
 using Abp.Web.Security.AntiForgery;
 using Jueci.MobileWeb.Lottery;
-using Jueci.MobileWeb.Ssc;
 using Camew.Lottery;
 using Jeuci.SalesSystem.Entities.Common;
 using Jueci.MobileWeb.Common.Enums;
@@ -48,6 +43,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             var planTitleInfo = _planAppService.GetPlanLibTitle(id, _cpType);
             ViewBag.PlanTitle = planTitleInfo.PlanTitle;
             ViewBag.SubPlanTitle = planTitleInfo.SubPlanTitle;
+            ViewBag.PlanState = planTitleInfo.PlanLibState;
 
             if (userPlanInfoResult.Code == ResultCode.NotAllowed)
             {

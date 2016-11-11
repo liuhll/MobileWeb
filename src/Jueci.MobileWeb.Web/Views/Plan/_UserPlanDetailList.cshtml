@@ -5,7 +5,7 @@
     @foreach (var lvItem in Model.PlanDetails.Take(Model.PlanDetails.Count - 1).OrderByDescending(p => p.CurrentCycleName))
     {
         <li data-icon="false">
-            <div class="ui-content-trans">
+            <div class="ui-content-trans text-copy">
                 <div class="tab-lv-item-first">
                     <span>@lvItem.CycleName</span>
                     <span class="font-emphasize">预</span>

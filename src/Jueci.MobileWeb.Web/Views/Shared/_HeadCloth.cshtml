@@ -1,10 +1,22 @@
-﻿@using Jueci.MobileWeb.Web.Models.Common
+﻿@using Jueci.MobileWeb.Common.Enums
+@using Jueci.MobileWeb.Web.Models.Common
 @{
     string cpType = ViewBag.CpType;
+    PlanLibState planLibState = ViewBag.PlanState;
 }
 
 <div data-role="header" data-theme="c" data-position="inline">
     @*<h1>重庆时时彩计划分享</h1>*@
-    <h1 style="min-width: 200px; margin: 0 auto"><a href=@ViewBag.OfficialWebsite style="color: #FFFFFF; text-decoration: none; font-size: 14px;">@Html.Raw(ViewBag.PlanTitle) - @Html.Raw(ViewBag.SubPlanTitle)</a></h1>
+    <h1 style="min-width: 200px; margin: 0 auto">
+        @if (planLibState == PlanLibState.Team)
+        {
+            @Html.Raw(ViewBag.PlanTitle + "-" + ViewBag.SubPlanTitle)
+        }
+        else
+        {
+            <a href=@ViewBag.OfficialWebsite style="color: #FFFFFF; text-decoration: none; font-size: 14px;">@Html.Raw(ViewBag.PlanTitle) - @Html.Raw(ViewBag.SubPlanTitle)</a>
+        }
+       
+    </h1>
     @Html.Action("Clock",cpType,new { ClockPage = ClockPage.HomePage })
 </div>

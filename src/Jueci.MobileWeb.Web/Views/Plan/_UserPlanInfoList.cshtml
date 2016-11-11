@@ -1,6 +1,7 @@
 ﻿@using System.Web.Optimization
 @using Camew.Lottery.AppService
 @using Jueci.MobileWeb.Common.Enums
+@using Jueci.MobileWeb.Web.Views
 @model IList<Jueci.MobileWeb.Lottery.Models.Transfer.UserPlanInfo>
 
 @{
@@ -25,12 +26,11 @@
 
 @foreach (var item in Model)
 {
-    <li data-icon="false"  data-tabIndex="@i">
-        <a class=@Html.Raw(i%2 == 1 ? "ui-content-trans" : "ui-content-gray")
-            @*href="@Url.RouteUrl("PlanDetails",new {Id = planId, TabIndex= i})"*@> 
+    <li data-icon="false" data-tabIndex="@i">
+        <a class="can-select-text @Html.Raw(i%2 == 1 ? "ui-content-trans" : "ui-content-gray")">
             <div>
                 <img src="~/images/icon/plan.png" class="lv-item-jhfa" alt="jhfa"/>
-                <span class="lv-item-title">@Html.Raw(item.Name)</span>
+                <span class="lv-item-title" data-tabindex="@i">@Html.Raw(item.Name)</span>
                 <span class="lv-item-progress-box">
                     <span>
                             @foreach (var block in item.GuessResultList)
@@ -43,11 +43,18 @@
                 </span>
                 <div class="clearfix"></div>
             </div>
-            <div style="margin-top: 6px">
+            <div style="margin-top: 6px" class="lv-item text-copy">
                 <span class="lv-item-q">@item.PlanSection</span>
                 <span class="number-circle number-circle-blue-small">@item.EndIndex</span>
                 <span class="lv-item-ds">@Html.Raw(string.Format("{0}", item.DsType == DMSMType.DM ? "定" : "杀"))</span>
                 <span class="lv-item-q">@item.GuessValue</span>
+                @if (!BrowerChecker.IsMoblie(Request))
+                {
+                    <span class="lv-item-q">
+                        <span class="lv-item-detail fr" data-tabindex="@i">详情</span>
+                    </span>
+                }
+               
             </div>
         </a>
     </li>
@@ -56,10 +63,16 @@
 }
 
 <script>
-    $(function() {
-        $('li').on('click', function () {
-           // debugger;
-            location.href = abp.appPath + "app/"+$("#cptype").val()+"/plandetails/" + $('#PlanId').val() + "?tabIndex=" + $(this).data('tabindex');//$(this).data('tabindex')
-        });
+    $(function () {
+        if (mobilecheck()) {
+            $('li').on('click', function () {
+                location.href = abp.appPath + "app/" + $("#cptype").val() + "/plandetails/" + $('#PlanId').val() + "?tabIndex=" + $(this).data('tabindex');//$(this).data('tabindex')
+            }); 
+        } else {
+            $('.lv-item-detail,.lv-item-title').on('click', function () {
+                location.href = abp.appPath + "app/" + $("#cptype").val() + "/plandetails/" + $('#PlanId').val() + "?tabIndex=" + $(this).data('tabindex');//$(this).data('tabindex')
+            });
+        }
+      
     });
 </script>
