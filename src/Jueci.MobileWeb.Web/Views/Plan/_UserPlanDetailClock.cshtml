@@ -21,7 +21,7 @@
     <span class="font-emphasize">@Model.UserPlanDetail.PlanDetails.LastOrDefault().GuessValue</span>
 </div>
 <div class="tab-section1-three fr">
-    <span class="number-circle number-circle-blue-small">1</span>
+    <span class="number-circle number-circle-blue-small">@Model.UserPlanDetail.PlanDetails.LastOrDefault().EndIndex</span>
     <span>@Html.Raw(string.Format("{0}期", Model.UserPlanDetail.PlanDetails.LastOrDefault().CurrentCycleName))</span>
     <span class="clock-img-container"><img class="clock-section-3" src="~/images/icon/clock@2x.png" alt="sj2" /></span>
     <span>

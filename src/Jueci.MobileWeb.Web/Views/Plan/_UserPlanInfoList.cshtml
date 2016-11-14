@@ -45,7 +45,11 @@
             </div>
             <div style="margin-top: 6px" class="lv-item text-copy">
                 <span class="lv-item-q">@item.PlanSection</span>
-                <span class="number-circle number-circle-blue-small">@item.EndIndex</span>
+                @if (item.EndIndex != null)
+                {
+                    <span class="number-circle number-circle-blue-small">@item.EndIndex</span>
+                }
+                
                 <span class="lv-item-ds">@Html.Raw(string.Format("{0}", item.DsType == DMSMType.DM ? "定" : "杀"))</span>
                 <span class="lv-item-q">@item.GuessValue</span>
                 @if (!BrowerChecker.IsMoblie(Request))
