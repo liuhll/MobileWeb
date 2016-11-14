@@ -45,7 +45,7 @@ namespace Jueci.MobileWeb.Lottery.Models.Transfer
                     subPlanTitle = "重庆时时彩计划";
                     break;
                 case CPType.pks:
-                    subPlanTitle = "北京Pk10计划";
+                    subPlanTitle = "北京PK10计划";
                     break;
 
             }
