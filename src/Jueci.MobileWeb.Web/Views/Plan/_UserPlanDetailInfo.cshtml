@@ -8,14 +8,17 @@
     <div class="fl tab-section2-sect"><span>最大连对</span><span class="font-emphasize">@Model.MaxAlwaysRight</span></div>
     <div class="fl tab-section2-sect"><span>最大连错</span><span class="font-emphasize">@Model.MaxAlwaysWrong</span></div>
     <div class="fl tab-section2-sect"><span>当前连对/错</span><span class="font-emphasize">@Model.CurrentROrW</span></div>
-    
-    @foreach (var rightTime in Model.RightTimes)
+
+    @if (Model.RightTimes != null)
     {
-        <div class="fl tab-section2-sect">
-            <span>@Html.Raw(string.Format("第{0}期中", j))</span>
-            <span class="font-emphasize">@Html.Raw(string.Format("{0}次", rightTime))</span>
-        </div>
-        j++;
+        foreach (var rightTime in Model.RightTimes)
+        {
+            <div class="fl tab-section2-sect">
+                <span>@Html.Raw(string.Format("第{0}期中", j))</span>
+                <span class="font-emphasize">@Html.Raw(string.Format("{0}次", rightTime))</span>
+            </div>
+            j++;
+        }
     }
    
     <div class="clearfix"></div>

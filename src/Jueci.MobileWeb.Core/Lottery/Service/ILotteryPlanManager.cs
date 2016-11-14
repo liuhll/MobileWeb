@@ -12,7 +12,7 @@ namespace Jueci.MobileWeb.Lottery.Service
         bool UpdateUserLotteryPlan(string id, List<PlanComputionInfo> planInfos, LotteryPlanLib lotteryPlanLib);
 
 
-        List<PlanComputionInfo> GetComputionInfos(string id, LotteryEngine sscLotteryEngine,ref bool isNeedUpdateCache);
+        List<PlanComputionInfo> GetComputionInfos(string id, LotteryEngine sscLotteryEngine/*,ref bool isNeedUpdateCache*/);
 
         PlanComputionData GetComputionData(string id, LotteryEngine sscLotteryEngine);
     }

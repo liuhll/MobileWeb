@@ -43,14 +43,14 @@ namespace Jueci.MobileWeb.Lottery.Service.LotteryPlanManager
           
         }
 
-        public List<PlanComputionInfo> GetComputionInfos(string id, LotteryEngine sscLotteryEngine, ref bool isNeedUpdateCache)
+        public List<PlanComputionInfo> GetComputionInfos(string id, LotteryEngine sscLotteryEngine/*, ref bool isNeedUpdateCache*/)
         {
             lock (_planComputionCache)
             {
                 if (_planComputionCache.ContainsKey(id))
                 {
                     _planComputionCache[id].OperateTime = DateTime.Now;
-                    isNeedUpdateCache = false;
+                   // isNeedUpdateCache = false;
                     return _planComputionCache[id].PlanComputionList;
                 }
                 var planLibInfo = _lotteryPlanLibRepository.Single(p => p.Id == id);
@@ -60,8 +60,10 @@ namespace Jueci.MobileWeb.Lottery.Service.LotteryPlanManager
                     LogHelper.Logger.Error(msg);
                     throw new Exception(msg);
                 }
-                isNeedUpdateCache = true;
-                return sscLotteryEngine.ConvertPCListFromXml(XElement.Parse(planLibInfo.PlanComputionInfo));
+               // isNeedUpdateCache = true;
+                var plancomputeInfos = sscLotteryEngine.ConvertPCListFromXml(XElement.Parse(planLibInfo.PlanComputionInfo));
+                this.UpdateUserLotteryPlan(id, plancomputeInfos, planLibInfo);
+                return plancomputeInfos;
             }
         }
 
