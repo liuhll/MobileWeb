@@ -3,7 +3,7 @@
 @{
     string cpType = ViewBag.CpType;
     PlanLibState planLibState = ViewBag.PlanState;
-   
+
 }
 
 <div data-role="header" data-theme="c" data-position="inline">
@@ -15,9 +15,18 @@
         }
         else
         {
-            <a href=@ViewBag.OfficialWebsite style="color: #FFFFFF; text-decoration: none; font-size: 14px;">@Html.Raw(ViewBag.PlanTitle) - @Html.Raw(ViewBag.SubPlanTitle)</a>
+            <a href=@ViewBag.OfficialWebsite style="color: #FFFFFF; margin-left: 30px; text-decoration: none; font-size: 14px;">@Html.Raw(ViewBag.PlanTitle) - @Html.Raw(ViewBag.SubPlanTitle)</a>
         }
-       
+        @if (planLibState != PlanLibState.Team)
+        {
+
+            <span class="fr">
+                <i class="fa fa-download" style="padding-top: 1px"></i>
+                <a href="@ViewBag.DownloadApp" style="color: #FFFFFF; text-decoration: none; font-size: 12px; margin-right: 10px">下载App</a>
+            </span>
+            <div class="clearfix"></div>
+        }
+
     </h1>
-    @Html.Action("Clock",cpType,new { ClockPage = ClockPage.HomePage })
+    @Html.Action("Clock", cpType, new { ClockPage = ClockPage.HomePage })
 </div>

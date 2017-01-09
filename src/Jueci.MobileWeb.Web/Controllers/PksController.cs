@@ -9,6 +9,7 @@ namespace Jueci.MobileWeb.Web.Controllers
         {
             //ViewBag.PlanTitle = "掌赢专家";
             //ViewBag.SubPlanTitle = "北京Pk10计划";
+            
         }
     }
 }

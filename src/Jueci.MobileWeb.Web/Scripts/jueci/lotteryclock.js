@@ -42,13 +42,13 @@ function getNewLottery() {
         "data": { 'cpType': $('#cptype').val() },
         "success": function (data) {
             var lotteryData = data["data"];
-
+            debugger;
             if (lotteryData['currentPeriod'] > currentPeriod) {
 
                 $('#CurrentPeriod').val(lotteryData['currentPeriod']);
                 $('#CurrentPeriodDisplay').text(lotteryData['currentPeriodDisplay']);
 
-                $('.number-circle.number-circle-normal').each(function (i) {
+                $('.number-circle').each(function (i) {
                     $(this).text(lotteryData['lotteryResult'][i]);
                 });
 

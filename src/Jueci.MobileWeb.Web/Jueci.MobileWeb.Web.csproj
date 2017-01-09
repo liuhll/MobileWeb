@@ -353,8 +353,6 @@
     <Content Include="Abp\Lib\jquery.serializeJSON\spec\spec.js" />
     <Content Include="Abp\Lib\jquery.serializeJSON\spec\spec_runner_jquery.html" />
     <Content Include="Abp\Lib\jquery.serializeJSON\spec\spec_runner_zepto.html" />
-    <Content Include="Abp\Lib\jquery\jquery-2.1.4.js" />
-    <Content Include="Abp\Lib\jquery\jquery-2.1.4.min.js" />
     <Content Include="Abp\Lib\shCircleLoader\jquery.shCircleLoader-min.js" />
     <Content Include="Abp\Lib\shCircleLoader\jquery.shCircleLoader.css" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -469,7 +467,6 @@
     <Content Include=".bowerrc" />
     <Content Include="bower.json" />
     <Content Include="Abp\Lib\jquery.mobile\jquery.mobile-1.4.5.min.map" />
-    <Content Include="Abp\Lib\jquery\jquery-2.1.4.min.map" />
     <Content Include="Abp\Lib\jquery.serializeJSON\.bower.json" />
     <Content Include="Abp\Lib\jquery.serializeJSON\bower.json" />
     <Content Include="Abp\Lib\jquery.serializeJSON\package.json" />
@@ -529,10 +526,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\CqklsfController.cs" />
+    <Compile Include="Controllers\Gd11x5Controller.cs" />
+    <Compile Include="Controllers\GdklsfController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CqSscController.cs" />
+    <Compile Include="Controllers\JsksController.cs" />
+    <Compile Include="Controllers\Jx11x5Controller.cs" />
+    <Compile Include="Controllers\Kl8Controller.cs" />
     <Compile Include="Controllers\PksController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
+    <Compile Include="Controllers\Sd11x5Controller.cs" />
     <Compile Include="Models\Common\ClockPage.cs" />
     <Compile Include="Models\Layout\LanguageSelectionViewModel.cs" />
     <Compile Include="Controllers\LayoutController.cs" />
@@ -596,9 +600,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Abp\Lib\jquery\" />
     <Folder Include="App_Data\" />
     <Folder Include="Filters\" />
     <Folder Include="images\ssc\" />
+    <Folder Include="Views\Cqklsf\" />
+    <Folder Include="Views\Gd11x5\" />
+    <Folder Include="Views\Jsks\" />
+    <Folder Include="Views\Jx11x5\" />
+    <Folder Include="Views\Pks1\" />
     <Folder Include="Views\Pks\" />
   </ItemGroup>
   <ItemGroup>

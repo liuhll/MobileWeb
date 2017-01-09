@@ -91,6 +91,27 @@ namespace Jueci.MobileWeb.Api.Controllers
                 case 2:
                     cpType = CPType.pks;
                     break;
+                case 3:
+                    cpType = CPType.gdklsf;
+                    break;
+                case 4:
+                    cpType = CPType.cqklsf;
+                    break;            
+                case 5:
+                    cpType = CPType.jx11x5;
+                    break;
+                case 6:
+                    cpType = CPType.gd11x5;
+                    break;
+                case 7:
+                    cpType = CPType.sd11x5;
+                    break;
+                case 8:
+                    cpType = CPType.jsks;
+                    break;
+                case 9:
+                    cpType = CPType.kl8;
+                    break;
                 default:
                     throw new Exception("没有您指定的服务类型的彩种！");
             }

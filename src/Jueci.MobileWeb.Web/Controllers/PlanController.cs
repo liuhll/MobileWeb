@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using Abp.Web.Security.AntiForgery;
@@ -12,6 +13,7 @@ using Jueci.MobileWeb.Lottery.Models.Transfer;
 using Jueci.MobileWeb.Web.Models.Common;
 using Jueci.MobileWeb.Web.Models.PlanShare;
 using Jueci.MobileWeb.Web.Models.UserPlanDetail;
+using Jueci.MobileWeb.Web.Views;
 
 namespace Jueci.MobileWeb.Web.Controllers
 {
@@ -26,16 +28,27 @@ namespace Jueci.MobileWeb.Web.Controllers
             _planAppService = planAppService;
             _cpType = cpType;
             ViewBag.CpType = _cpType.ToString();
+ 
         }
+
+     
 
         // GET: Ssc
         public ActionResult Planshare(string id)
         {
             var vcode = GetSessionValue<string>(id);
             ResultMessage<IList<UserPlanInfo>> userPlanInfoResult;
-            userPlanInfoResult = !string.IsNullOrEmpty(vcode) ?
-                _planAppService.GetUserPlanInfos(id, vcode, _cpType) :
-                _planAppService.GetUserPlanInfos(id, _cpType, true);
+            try
+            {
+                userPlanInfoResult = !string.IsNullOrEmpty(vcode) ?
+                    _planAppService.GetUserPlanInfos(id, vcode, _cpType) :
+                    _planAppService.GetUserPlanInfos(id, _cpType, true);
+            }
+            catch (Exception e)
+            {
+                //return new HttpStatusCodeResult(404, string.Format("不存在id为{0}的计划库", id));
+                return Redirect("http://plan.camew.com/404.html");
+            }
 
             ViewBag.OfficialWebsite = ConfigHelper.GetValuesByKey("OfficialWebsite");
             ViewBag.PlanId = id;
@@ -44,7 +57,7 @@ namespace Jueci.MobileWeb.Web.Controllers
             ViewBag.PlanTitle = planTitleInfo.PlanTitle;
             ViewBag.SubPlanTitle = planTitleInfo.SubPlanTitle;
             ViewBag.PlanState = planTitleInfo.PlanLibState;
-
+            SetDownloadAppSite();
             if (userPlanInfoResult.Code == ResultCode.NotAllowed)
             {
                 ViewBag.ReturnUrl = Request.RawUrl.Substring(1);
@@ -53,7 +66,8 @@ namespace Jueci.MobileWeb.Web.Controllers
             }
             if (userPlanInfoResult.Code != ResultCode.Success)
             {
-                return new HttpNotFoundResult(userPlanInfoResult.Msg);
+                return Redirect("http://plan.camew.com/404.html");
+   
             }
             return View("~/Views/Plan/Planshare.cshtml", userPlanInfoResult.Data);
         }
@@ -169,8 +183,8 @@ namespace Jueci.MobileWeb.Web.Controllers
                 var result = _planAppService.IsNeedAccessRight(id, _cpType);
                 if (result.Data)
                 {
-                    string returnUrl = string.Format("app/{0}/plandetails/{1}?tabIndex={2}",_cpType.ToString(),id,currentTabIndex);
-                    return Json(new AccessRightResult(true, result.Msg, returnUrl),JsonRequestBehavior.AllowGet);
+                    string returnUrl = string.Format("app/{0}/plandetails/{1}?tabIndex={2}", _cpType.ToString(), id, currentTabIndex);
+                    return Json(new AccessRightResult(true, result.Msg, returnUrl), JsonRequestBehavior.AllowGet);
                 }
             }
             var userPlanDetail = string.IsNullOrEmpty(vcode)
@@ -183,6 +197,67 @@ namespace Jueci.MobileWeb.Web.Controllers
             ViewBag.PlanId = id;
             ViewBag.TabIndex = currentTabIndex;
             return PartialView("~/Views/Plan/_UserPlanDetailContent.cshtml", userPlanDetail.Data);
+        }
+
+
+        private void SetDownloadAppSite()
+        {
+            if (BrowerChecker.IsMoblie(Request))
+            {
+                if (BrowerChecker.IsIphone(Request))
+                {
+                    if (BrowerChecker.IsWeChatBrower(Request))
+                    {
+                        switch (_cpType)
+                        {
+                            case CPType.pks:
+                                ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("IphonePksPic");
+                                break;
+                            case CPType.cqssc:
+                                ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("IphoneSscPic");
+                                break;
+                            default:
+                                ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("IphoneComplexPic");
+                                break;
+                        }
+                        return;
+                    }
+
+                    switch (_cpType)
+                    {
+                        case CPType.cqssc:
+                            ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("IphoneAppStoreSsc");
+                            break;
+                        case CPType.pks:
+                            ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("IphoneAppStorePks");
+                            break;
+                        default:
+                            ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("IphoneAppStoreComplex");
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (_cpType)
+                    {
+                        case CPType.cqssc:
+                            ViewBag.DownloadApp = string.Format(ConfigHelper.GetValuesByKey("TencentAppStoreSite"), "ssc");
+                            break;
+                        case CPType.pks:
+                            ViewBag.DownloadApp = string.Format(ConfigHelper.GetValuesByKey("TencentAppStoreSite"), "pks");
+                            break;
+                        default:
+                            ViewBag.DownloadApp = string.Format(ConfigHelper.GetValuesByKey("TencentAppStoreSite"), "zyzj");
+                            break;                          
+                    }
+                }
+            }
+            else
+            {
+                ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("OfficialWebsite");
+            }
+
+            //  ViewBag.DownloadApp = ConfigHelper.GetValuesByKey("OfficialWebsite");
         }
 
     }
